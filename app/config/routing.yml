@@ -1,0 +1,9 @@
+musicisti_core_bundle:
+    resource: "@MusicistiCoreBundle/Controller"
+    prefix:   /
+    type:     annotation
+
+musicisti_cms_bundle:
+    resource: "@MusicistiCMSBundle/Controller"
+    prefix:   /
+    type:     annotation
