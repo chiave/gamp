@@ -12,8 +12,3 @@ _configurator:
 
 _main:
     resource: routing.yml
-
-musicisti_cms_bundle:
-    resource: "@MusicistiCoreBundle/Controller"
-    prefix:   /
-    type:     annotation
