@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Articles</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ page.id }}</td>
+            </tr>
+            <tr>
+                <th>Shortcontent</th>
+                <td>{{ page.staticContent }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{{ page.createdAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{{ page.updatedAt|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('cms_pages') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('cms_pages_edit', { 'id': page.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
