@@ -1,0 +1,7 @@
+parameters:
+#    musicisti_cms.example.class: Musicisti\CMSBundle\Example
+
+services:
+#    musicisti_cms.example:
+#        class: %musicisti_cms.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
