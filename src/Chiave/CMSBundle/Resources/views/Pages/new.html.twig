@@ -1,0 +1,14 @@
+{% extends "ChiaveCoreBundle::backendbase.html.twig" %}
+
+{% block title %}Zarządzanie stronami{% endblock %}
+{% block description %}tworzenie nowej strony{% endblock %}
+
+{% block body -%}
+
+    {{ form(form) }}
+
+    <a class="button small" href="{{ path('cms_pages') }}">
+        Powrót do listy stron
+    </a>
+
+{% endblock %}

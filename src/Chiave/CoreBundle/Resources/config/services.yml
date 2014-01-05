@@ -1,0 +1,7 @@
+parameters:
+#    chiave_core.example.class: Chiave\CoreBundle\Example
+
+services:
+#    chiave_core.example:
+#        class: %chiave_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
