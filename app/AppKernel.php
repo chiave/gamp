@@ -16,8 +16,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Musicisti\CoreBundle\MusicistiCoreBundle(),
-            new Musicisti\CMSBundle\MusicistiCMSBundle(),
+            new Chiave\CoreBundle\ChiaveCoreBundle(),
+            new Chiave\CMSBundle\ChiaveCMSBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

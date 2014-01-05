@@ -1,9 +1,9 @@
-musicisti_core_bundle:
-    resource: "@MusicistiCoreBundle/Controller"
+chiave_core_bundle:
+    resource: "@ChiaveCoreBundle/Controller"
     prefix:   /
     type:     annotation
 
-musicisti_cms_bundle:
-    resource: "@MusicistiCMSBundle/Controller"
+chiave_cms_bundle:
+    resource: "@ChiaveCMSBundle/Controller"
     prefix:   /
     type:     annotation
