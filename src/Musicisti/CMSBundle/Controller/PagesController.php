@@ -20,7 +20,7 @@ class PagesController extends Controller
 {
 
     /**
-     * Lists all Pages.
+     * Lists all pages.
      *
      * @Route("/", name="cms_pages")
      * @Method("GET")
@@ -39,7 +39,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Creates a new Pages.
+     * Creates new page.
      *
      * @Route("/", name="cms_pages_create")
      * @Method("POST")
@@ -69,7 +69,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Displays a form to create a new Pages.
+     * Displays a form to create new page.
      *
      * @Route("/new", name="cms_pages_new")
      * @Method("GET")
@@ -90,7 +90,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Finds and displays a Pages entity.
+     * Finds and displays page.
      *
      * @Route("/{id}", name="cms_pages_show")
      * @Method("GET")
@@ -115,7 +115,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Pages.
+     * Displays a form to edit an existing page.
      *
      * @Route("/{id}/edit", name="cms_pages_edit")
      * @Method("GET")
@@ -145,7 +145,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Edits an existing Pages.
+     * Edits an existing page.
      *
      * @Route("/{id}", name="cms_pages_update")
      * @Method("POST")
@@ -182,7 +182,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Deletes a Pages.
+     * Deletes page.
      *
      * @Route("/{id}", name="cms_pages_delete")
      * @Method("POST")
@@ -232,7 +232,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Creates a form to delete a Page by id.
+     * Creates a form to delete page.
      *
      * @param mixed $id The page id
      *
