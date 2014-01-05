@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="cms_articles")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Articles
 {
@@ -20,6 +21,13 @@ class Articles
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    private $title;
 
     /**
      * @var string
@@ -38,9 +46,9 @@ class Articles
     /**
      * @var boolean
      *
-     * @ORM\Column(name="important", type="boolean")
+     * @ORM\Column(name="important", type="boolean", nullable=true)
      */
-    private $important;
+    private $important = false;
 
     /**
      * @var \DateTime
@@ -86,6 +94,29 @@ class Articles
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Articles
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -204,6 +235,15 @@ class Articles
     }
 
     /**
+     * @ORM\PrePersist
+     */
+    public function setInitialTimestamps()
+    {
+        $this->createdAt = new \DateTime('now');
+        $this->updatedAt = new \DateTime('now');
+    }
+
+    /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
@@ -224,6 +264,14 @@ class Articles
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedTimestamps()
+    {
+        $this->updatedAt = new \DateTime('now');
     }
 
     /**

@@ -1,16 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends "MusicistiCoreBundle::backendbase.html.twig" %}
+
+{% block title %}Zarządzanie artykułami{% endblock %}
+{% block description %}edycja artykułu{% endblock %}
 
 {% block body -%}
-    <h1>Articles edit</h1>
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('cms_articles') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <a class="button small" href="{{ path('cms_articles') }}">
+        Powrót do listy artykułów
+    </a>
+    {{ form(delete_form) }}
+
 {% endblock %}

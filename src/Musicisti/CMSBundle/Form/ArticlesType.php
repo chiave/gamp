@@ -15,13 +15,18 @@ class ArticlesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('title')
             ->add('shortContent')
             ->add('content')
+            ->add('page')
             ->add('important')
             ->add('publicationDate')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('page')
+            ->add('submit', 
+                'submit', 
+                array(
+                    'label' => 'Wyślij'
+                )
+            )
         ;
     }
     

@@ -1,51 +1,49 @@
-{% extends '::base.html.twig' %}
+{% extends "MusicistiCoreBundle::backendbase.html.twig" %}
+
+{% block title %}Zarządzanie artykułami{% endblock %}
+{% block description %}lista artykułów{% endblock %}
 
 {% block body -%}
-    <h1>Articles list</h1>
+    <div class="row">
+        <a class="button success right" href="{{ path('cms_articles_new') }}">
+            Utwórz nowy artykuł
+        </a>
+    </div>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Shortcontent</th>
-                <th>Content</th>
-                <th>Important</th>
-                <th>Publicationdate</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Actions</th>
+                <th>Lp.</th>
+                <th>Tytuł</th>
+                <th>Strona</th>
+                <th>Publikacja</th>
+                {# <th>Utworzony</th> #}
+                <th>Edytowany</th>
+                <th>Ważny</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for article in articles %}
             <tr>
-                <td><a href="{{ path('cms_articles_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.shortContent }}</td>
-                <td>{{ entity.content }}</td>
-                <td>{{ entity.important }}</td>
-                <td>{% if entity.publicationDate %}{{ entity.publicationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ loop.index }}</a></td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.page }}</td>
+                <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d H:i:s') }}{% else %}-----{% endif %}</td>
+                {# <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
+                <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if article.important == true %}tak{% else %}nie {% endif %}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('cms_articles_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('cms_articles_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <div class="button-bar">
+                        <ul class="button-group">
+                            <li><a class="tiny button" href="{{ path('cms_articles_edit', { 'id': article.id }) }}">Edytuj</a></li>
+                            <li><a class="tiny button alert" href="{{ path('cms_articles_delete', { 'id': article.id }) }}">Usuń</a></li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('cms_articles_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
     {% endblock %}

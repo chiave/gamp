@@ -20,7 +20,7 @@ class ArticlesController extends Controller
 {
 
     /**
-     * Lists all Articles entities.
+     * Lists all Articles.
      *
      * @Route("/", name="cms_articles")
      * @Method("GET")
@@ -30,14 +30,16 @@ class ArticlesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('MusicistiCMSBundle:Articles')->findAll();
+        $articles = $em->getRepository('MusicistiCMSBundle:Articles')
+            ->findBy(array(), array('createdAt' => 'DESC'));
 
         return array(
-            'entities' => $entities,
+            'articles' => $articles,
         );
     }
+
     /**
-     * Creates a new Articles entity.
+     * Creates a new Articles.
      *
      * @Route("/", name="cms_articles_create")
      * @Method("POST")
@@ -45,45 +47,29 @@ class ArticlesController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Articles();
-        $form = $this->createCreateForm($entity);
+        $article = new Articles();
+        $form = $this->createArticleForm(
+            $article,
+            'cms_articles_create'
+            );
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($article);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('cms_articles_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('cms_articles'));
         }
 
         return array(
-            'entity' => $entity,
+            'article' => $article,
             'form'   => $form->createView(),
         );
     }
 
     /**
-    * Creates a form to create a Articles entity.
-    *
-    * @param Articles $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(Articles $entity)
-    {
-        $form = $this->createForm(new ArticlesType(), $entity, array(
-            'action' => $this->generateUrl('cms_articles_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new Articles entity.
+     * Displays a form to create a new Articles.
      *
      * @Route("/new", name="cms_articles_new")
      * @Method("GET")
@@ -91,17 +77,20 @@ class ArticlesController extends Controller
      */
     public function newAction()
     {
-        $entity = new Articles();
-        $form   = $this->createCreateForm($entity);
+        $article = new Articles();
+        $form = $this->createArticleForm(
+            $article,
+            'cms_articles_create'
+            );
 
         return array(
-            'entity' => $entity,
+            'article' => $article,
             'form'   => $form->createView(),
         );
     }
 
     /**
-     * Finds and displays a Articles entity.
+     * Finds and displays a Articles.
      *
      * @Route("/{id}", name="cms_articles_show")
      * @Method("GET")
@@ -111,22 +100,22 @@ class ArticlesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
+        $article = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Articles entity.');
+        if (!$article) {
+            throw $this->createNotFoundException('Unable to find Articles.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'article'      => $article,
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Displays a form to edit an existing Articles entity.
+     * Displays a form to edit an existing Articles.
      *
      * @Route("/{id}/edit", name="cms_articles_edit")
      * @Method("GET")
@@ -136,59 +125,48 @@ class ArticlesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
+        $article = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Articles entity.');
+        if (!$article) {
+            throw $this->createNotFoundException('Unable to find Articles article.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createArticleForm(
+            $article,
+            'cms_articles_update'
+            );
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'article'      => $article,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Articles entity.
-    *
-    * @param Articles $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Articles $entity)
-    {
-        $form = $this->createForm(new ArticlesType(), $entity, array(
-            'action' => $this->generateUrl('cms_articles_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Articles entity.
+     * Edits an existing Articles.
      *
      * @Route("/{id}", name="cms_articles_update")
-     * @Method("PUT")
+     * @Method("POST")
      * @Template("MusicistiCMSBundle:Articles:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
+        $article = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Articles entity.');
+        if (!$article) {
+            throw $this->createNotFoundException('Unable to find Articles article.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+
+        $editForm = $this->createArticleForm(
+            $article,
+            'cms_articles_update'
+            );
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -198,16 +176,17 @@ class ArticlesController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
+            'article'      => $article,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
-     * Deletes a Articles entity.
+     * Deletes a Articles.
      *
      * @Route("/{id}", name="cms_articles_delete")
-     * @Method("DELETE")
+     * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -216,13 +195,13 @@ class ArticlesController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
+            $article = $em->getRepository('MusicistiCMSBundle:Articles')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Articles entity.');
+            if (!$article) {
+                throw $this->createNotFoundException('Unable to find Articles.');
             }
 
-            $em->remove($entity);
+            $em->remove($article);
             $em->flush();
         }
 
@@ -230,9 +209,33 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Creates a form to delete a Articles entity by id.
+    * Creates a form for article.
+    *
+    * @param Articles $article
+    * @param string $route
+    *
+    * @return \Symfony\Component\Form\Form Form for page
+    */
+    public function createArticleForm(Articles $article, $route)
+    {
+        return $this->createForm(
+            new ArticlesType(),
+            $article,
+            array(
+                'action' => $this->generateUrl(
+                    $route,
+                    array(
+                        'id' => $article->getId(),
+                    )),
+                'method' => 'post',
+            )
+        );
+    }
+
+    /**
+     * Creates a form to delete a Articles by id.
      *
-     * @param mixed $id The entity id
+     * @param mixed $id The article id
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -240,8 +243,8 @@ class ArticlesController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('cms_articles_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->setMethod('POST')
+            ->add('submit', 'submit', array('label' => 'Usuń artykuł'))
             ->getForm()
         ;
     }

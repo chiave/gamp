@@ -57,9 +57,6 @@ class PagesController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($page);
-            $now = new \DateTime('now');
-            $page->setCreatedAt($now);
-            $page->setUpdatedAt($now);
             $em->flush();
 
             return $this->redirect($this->generateUrl('cms_pages'));
@@ -172,8 +169,6 @@ class PagesController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $now = new \DateTime('now');
-            $page->setUpdatedAt($now);
             $em->flush();
 
             return $this->redirect($this->generateUrl('cms_pages_edit', array('id' => $id)));
@@ -217,7 +212,6 @@ class PagesController extends Controller
     *
     * @param Pages $page
     * @param string $route
-    * @param string $action
     *
     * @return \Symfony\Component\Form\Form Form for page
     */

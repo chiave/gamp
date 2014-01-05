@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="cms_pages")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Pages
 {
@@ -151,6 +152,15 @@ class Pages
     }
 
     /**
+     * @ORM\PrePersist
+     */
+    public function setInitialTimestamps()
+    {
+        $this->createdAt = new \DateTime('now');
+        $this->updatedAt = new \DateTime('now');
+    }
+
+    /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
@@ -171,6 +181,14 @@ class Pages
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedTimestamps()
+    {
+        $this->updatedAt = new \DateTime('now');
     }
 
     /**
