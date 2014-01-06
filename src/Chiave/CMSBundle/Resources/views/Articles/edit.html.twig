@@ -6,10 +6,17 @@
 {% block body -%}
 
     {{ form(edit_form) }}
-
+	
     <a class="button small" href="{{ path('cms_articles') }}">
         Powrót do listy artykułów
     </a>
     {{ form(delete_form) }}
 
+{% endblock %}
+
+{% block javascripts -%}
+
+<script type="text/javascript">
+    CKEDITOR.replace( '{{ edit_form.content.vars.id }}' );
+</script>
 {% endblock %}

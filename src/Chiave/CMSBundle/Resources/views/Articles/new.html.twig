@@ -12,3 +12,10 @@
     </a>
 
 {% endblock %}
+
+{% block javascripts -%}
+
+<script type="text/javascript">
+    CKEDITOR.replace( '{{ form.content.vars.id }}' );
+</script>
+{% endblock %}
