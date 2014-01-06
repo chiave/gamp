@@ -17,6 +17,13 @@
 {% block javascripts -%}
 
 <script type="text/javascript">
+
+    $('.fdatetimepicker').fdatetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'de'
+	});
     CKEDITOR.replace( '{{ edit_form.content.vars.id }}' );
+
 </script>
+
 {% endblock %}

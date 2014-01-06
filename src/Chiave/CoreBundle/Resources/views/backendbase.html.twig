@@ -12,9 +12,17 @@
         <link rel="stylesheet" href="{{ asset('bundles/chiavecore/css/backend.css') }}" />
         <script src="{{ asset('bundles/chiavecore/js/modernizr.js') }}"></script>
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="{{ asset('bundles/chiavecore/js/foundation.min.js') }}"></script>
+        <script src="{{ asset('bundles/chiavecore/js/foundation.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
+        <script src="{{ asset('bundles/chiavecore/js/foundation-datetimepicker.js') }}"></script>
+        <link href="{{ asset('bundles/chiavecore/stylesheets/foundation-datepicker.css') }}" rel="stylesheet">
+
+        <script type="text/javascript">
+            // $(function() {
+            // });
+        </script>
 
     </head>
     <body>
@@ -106,8 +114,10 @@
             </div>
         </div>
     </section>
+
     <script>
-      $(document).foundation();
+                  // $(document).foundation();
+                  // $('.datetimepicker').fdatepicker();
     </script>
   </body>
 </html>
