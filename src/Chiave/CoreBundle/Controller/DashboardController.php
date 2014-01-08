@@ -24,7 +24,7 @@ class DashboardController extends Controller
      * index Action
      *
      * @Route("/admin/", name="cms_dashboard")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function indexAction()
     {

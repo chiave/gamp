@@ -26,7 +26,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles", name="cms_articles")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function indexAction()
@@ -46,7 +46,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/create", name="cms_articles_create")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template("ChiaveCMSBundle:Articles:new.html.twig")
      */
     public function createAction(Request $request)
@@ -77,7 +77,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/new", name="cms_articles_new")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function newAction()
@@ -124,7 +124,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/{id}/edit", name="cms_articles_edit")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function editAction($id)
@@ -155,7 +155,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/{id}/update", name="cms_articles_update")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template("ChiaveCMSBundle:Articles:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -194,7 +194,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/{id}/delete", name="cms_articles_delete")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, $id)
     {

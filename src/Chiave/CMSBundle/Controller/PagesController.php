@@ -26,7 +26,7 @@ class PagesController extends Controller
      *
      * @Route("/admin/pages", name="cms_pages")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function indexAction()
@@ -46,7 +46,7 @@ class PagesController extends Controller
      *
      * @Route("/admin/pages/create", name="cms_pages_create")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template("ChiaveCMSBundle:Pages:new.html.twig")
      */
     public function createAction(Request $request)
@@ -77,7 +77,7 @@ class PagesController extends Controller
      *
      * @Route("/admin/pages/new", name="cms_pages_new")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function newAction()
@@ -121,7 +121,7 @@ class PagesController extends Controller
      *
      * @Route("/admin/pages/{id}/edit", name="cms_pages_edit")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template()
      */
     public function editAction($id)
@@ -152,7 +152,7 @@ class PagesController extends Controller
      *
      * @Route("/admin/pages/{id}/update", name="cms_pages_update")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      * @Template("ChiaveCMSBundle:Pages:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -190,7 +190,7 @@ class PagesController extends Controller
      *
      * @Route("/admin/pages/{id}/delete", name="cms_pages_delete")
      * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')"
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, $id)
     {
