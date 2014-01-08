@@ -14,7 +14,7 @@ use Chiave\CMSBundle\Form\PagesType;
 /**
  * Pages controller.
  *
- * @Route("/pages")
+ * @Route("/")
  */
 class PagesController extends Controller
 {
@@ -22,7 +22,7 @@ class PagesController extends Controller
     /**
      * Lists all pages.
      *
-     * @Route("/", name="cms_pages")
+     * @Route("/admin/pages", name="cms_pages")
      * @Method("GET")
      * @Template()
      */
@@ -41,7 +41,7 @@ class PagesController extends Controller
     /**
      * Creates new page.
      *
-     * @Route("/", name="cms_pages_create")
+     * @Route("/admin/pages/create", name="cms_pages_create")
      * @Method("POST")
      * @Template("ChiaveCMSBundle:Pages:new.html.twig")
      */
@@ -71,7 +71,7 @@ class PagesController extends Controller
     /**
      * Displays a form to create new page.
      *
-     * @Route("/new", name="cms_pages_new")
+     * @Route("/admin/pages/new", name="cms_pages_new")
      * @Method("GET")
      * @Template()
      */
@@ -92,7 +92,7 @@ class PagesController extends Controller
     /**
      * Finds and displays page.
      *
-     * @Route("/{id}", name="cms_pages_show")
+     * @Route("/show/{id}", name="cms_pages_show")
      * @Method("GET")
      * @Template()
      */
@@ -117,7 +117,7 @@ class PagesController extends Controller
     /**
      * Displays a form to edit an existing page.
      *
-     * @Route("/{id}/edit", name="cms_pages_edit")
+     * @Route("/admin/pages/{id}/edit", name="cms_pages_edit")
      * @Method("GET")
      * @Template()
      */
@@ -147,7 +147,7 @@ class PagesController extends Controller
     /**
      * Edits an existing page.
      *
-     * @Route("/{id}", name="cms_pages_update")
+     * @Route("/admin/pages/{id}/update", name="cms_pages_update")
      * @Method("POST")
      * @Template("ChiaveCMSBundle:Pages:edit.html.twig")
      */
@@ -184,7 +184,7 @@ class PagesController extends Controller
     /**
      * Deletes page.
      *
-     * @Route("/{id}", name="cms_pages_delete")
+     * @Route("/admin/pages/{id}/delete", name="cms_pages_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)

@@ -14,7 +14,7 @@ use Chiave\CMSBundle\Form\ArticlesType;
 /**
  * Articles controller.
  *
- * @Route("/articles")
+ * @Route("/")
  */
 class ArticlesController extends Controller
 {
@@ -22,7 +22,7 @@ class ArticlesController extends Controller
     /**
      * Lists all Articles.
      *
-     * @Route("/", name="cms_articles")
+     * @Route("/admin/articles", name="cms_articles")
      * @Method("GET")
      * @Template()
      */
@@ -41,7 +41,7 @@ class ArticlesController extends Controller
     /**
      * Creates a new Articles.
      *
-     * @Route("/", name="cms_articles_create")
+     * @Route("/admin/articles/create", name="cms_articles_create")
      * @Method("POST")
      * @Template("ChiaveCMSBundle:Articles:new.html.twig")
      */
@@ -71,7 +71,7 @@ class ArticlesController extends Controller
     /**
      * Displays a form to create a new Articles.
      *
-     * @Route("/new", name="cms_articles_new")
+     * @Route("/admin/articles/new", name="cms_articles_new")
      * @Method("GET")
      * @Template()
      */
@@ -92,7 +92,7 @@ class ArticlesController extends Controller
     /**
      * Finds and displays a Articles.
      *
-     * @Route("/{id}", name="cms_articles_show")
+     * @Route("/admin/articles/{id}", name="cms_articles_show")
      * @Method("GET")
      * @Template()
      */
@@ -117,7 +117,7 @@ class ArticlesController extends Controller
     /**
      * Displays a form to edit an existing Articles.
      *
-     * @Route("/{id}/edit", name="cms_articles_edit")
+     * @Route("/admin/articles/{id}/edit", name="cms_articles_edit")
      * @Method("GET")
      * @Template()
      */
@@ -147,7 +147,7 @@ class ArticlesController extends Controller
     /**
      * Edits an existing Articles.
      *
-     * @Route("/{id}", name="cms_articles_update")
+     * @Route("/admin/articles/{id}/update", name="cms_articles_update")
      * @Method("POST")
      * @Template("ChiaveCMSBundle:Articles:edit.html.twig")
      */
@@ -185,7 +185,7 @@ class ArticlesController extends Controller
     /**
      * Deletes a Articles.
      *
-     * @Route("/{id}", name="cms_articles_delete")
+     * @Route("/admin/articles/{id}/delete", name="cms_articles_delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
