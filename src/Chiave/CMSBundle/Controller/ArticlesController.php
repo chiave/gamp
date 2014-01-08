@@ -4,6 +4,8 @@ namespace Chiave\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -24,6 +26,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles", name="cms_articles")
      * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN')"
      * @Template()
      */
     public function indexAction()
@@ -43,6 +46,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/create", name="cms_articles_create")
      * @Method("POST")
+     * @Security("has_role('ROLE_ADMIN')"
      * @Template("ChiaveCMSBundle:Articles:new.html.twig")
      */
     public function createAction(Request $request)
@@ -73,6 +77,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/new", name="cms_articles_new")
      * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN')"
      * @Template()
      */
     public function newAction()
@@ -92,7 +97,7 @@ class ArticlesController extends Controller
     /**
      * Finds and displays a Articles.
      *
-     * @Route("/admin/articles/{id}", name="cms_articles_show")
+     * @Route("/articles/{id}", name="cms_articles_show")
      * @Method("GET")
      * @Template()
      */
@@ -119,6 +124,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/{id}/edit", name="cms_articles_edit")
      * @Method("GET")
+     * @Security("has_role('ROLE_ADMIN')"
      * @Template()
      */
     public function editAction($id)
@@ -149,6 +155,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/{id}/update", name="cms_articles_update")
      * @Method("POST")
+     * @Security("has_role('ROLE_ADMIN')"
      * @Template("ChiaveCMSBundle:Articles:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -187,6 +194,7 @@ class ArticlesController extends Controller
      *
      * @Route("/admin/articles/{id}/delete", name="cms_articles_delete")
      * @Method("POST")
+     * @Security("has_role('ROLE_ADMIN')"
      */
     public function deleteAction(Request $request, $id)
     {

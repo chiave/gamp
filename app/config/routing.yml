@@ -1,3 +1,6 @@
+login_check:
+    path:   /login_check
+
 chiave_core_bundle:
     resource: "@ChiaveCoreBundle/Controller"
     prefix:   /
