@@ -546,6 +546,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	padding:7px 25px;
 	color: #C3C1C1;
 	font-size:18px;
+	line-height:24px;
 }
 .plainMeta h3 a
 {
@@ -650,26 +651,32 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .contactForm
 {
 	padding:20px;
-	border-radius:10px;
 	margin:25px auto;
-	
-	background:url(images/form_bg.png);
 	opacity:0.6;
-	-webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
-	-moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
-	box-shadow:         0px 3px 5px 0px rgba(0, 0, 0, 1);
+
 	
 	overflow:hidden;
 }
 
 .contactForm input
 {
-	width:400px;
+	width:300px;
 	display:block;
 	text-align:center;
 	margin:8px auto;
-	padding:10px 0px;
-	font-size:18px;
+	padding:7px 0px;
+	font-size:12px;
+	background:url(images/form_bg.png);
+	border-radius:10px;
+		-webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
+	-moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
+	box-shadow:         0px 3px 5px 0px rgba(0, 0, 0, 1);
+	border:none;
+	color:white;
+}
+.contactForm input:FOCUS
+{
+	outline: none;
 }
 .contactForm textarea
 {
@@ -678,6 +685,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	padding:10px;
 	font-size:14px;
 	font-family:arial;
+	background:url(images/form_bg.png);
+	border-radius:10px;
+		-webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
+	-moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
+	box-shadow:         0px 3px 5px 0px rgba(0, 0, 0, 1);
+	border:none;
+	color:white;
+}
+.contactForm textarea:FOCUS
+{
+	outline: none;
 }
 .contactForm input.submit
 {
@@ -689,6 +707,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	-webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
 	box-shadow:         0px 3px 5px 0px rgba(0, 0, 0, 1);
+	
 }
 .contactForm input.submit:HOVER
 {
@@ -717,4 +736,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	clear:both;
 	padding-bottom:15px;
 }
+
+ul.dottedList
+{
+	list-style-image:url(images/dot.png);
+	margin-left:30px;
+	line-height:30px;
+}
+
 
