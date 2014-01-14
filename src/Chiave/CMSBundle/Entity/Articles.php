@@ -4,6 +4,10 @@ namespace Chiave\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+const TYPE_REGULAR  = 0;
+const TYPE_LIST     = 1;
+const TYPE_TAB      = 2;
+
 /**
  * Articles
  *
@@ -25,16 +29,41 @@ class Articles
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="header", type="string", length=255)
      */
-    private $title;
+    private $header;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="shortContent", type="text")
+     * @ORM\Column(name="description", type="text")
      */
-    private $shortContent;
+    private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type = TYPE_REGULAR;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="root", type="boolean", nullable=true)
+     */
+    private $root = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Articles", inversedBy="childrens")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Articles", mappedBy="parent")
+     */
+    private $childrens;
 
     /**
      * @var string
@@ -83,7 +112,11 @@ class Articles
      */
     public function __toString()
     {
-        return $this->title;
+        return $this->header;
+    }
+
+    public function __construct() {
+        $this->childrens = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -97,49 +130,176 @@ class Articles
     }
 
     /**
-     * Set title
+     * Set header
      *
-     * @param string $title
+     * @param string $header
      * @return Articles
      */
-    public function setTitle($title)
+    public function setHeader($header)
     {
-        $this->title = $title;
+        $this->header = $header;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get header
      *
      * @return string 
      */
-    public function getTitle()
+    public function getHeader()
     {
-        return $this->title;
+        return $this->header;
     }
 
     /**
-     * Set shortContent
+     * Set description
      *
-     * @param string $shortContent
+     * @param string $description
      * @return Articles
      */
-    public function setShortContent($shortContent)
+    public function setDescription($description)
     {
-        $this->shortContent = $shortContent;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get shortContent
+     * Get description
      *
      * @return string 
      */
-    public function getShortContent()
+    public function getDescription()
     {
-        return $this->shortContent;
+        return $this->description;
+    }
+
+    /**
+     * Get all types
+     *
+     * @return array
+     */
+    public static function getTypesArray()
+    {
+        return array(
+            0 => 'wpis',
+            1 => 'lista',
+            2 => 'zakładka',
+        );
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     * @return Articles
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set root
+     *
+     * @param boolean $root
+     * @return Articles
+     */
+    public function setRoot($root)
+    {
+        $this->root = $root;
+
+        return $this;
+    }
+
+    /**
+     * Get root
+     *
+     * @return boolean 
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * Is root
+     *
+     * @param boolean $root
+     * @return Articles
+     */
+    public function isRoot($root)
+    {
+        return $this->root ? true : false;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Chiave\CMSBundle\Entity\Articles $parent
+     * @return Articles
+     */
+    public function setParent(\Chiave\CMSBundle\Entity\Articles $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Chiave\CMSBundle\Entity\Articles 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Add childrens
+     *
+     * @param \Chiave\CMSBundle\Entity\Articles $childrens
+     * @return Articles
+     */
+    public function addChildren(\Chiave\CMSBundle\Entity\Articles $childrens)
+    {
+        $this->childrens[] = $childrens;
+
+        return $this;
+    }
+
+    /**
+     * Remove childrens
+     *
+     * @param \Chiave\CMSBundle\Entity\Articles $childrens
+     */
+    public function removeChildren(\Chiave\CMSBundle\Entity\Articles $childrens)
+    {
+        $this->childrens->removeElement($childrens);
+    }
+
+    /**
+     * Get childrens
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildrens()
+    {
+        return $this->childrens;
     }
 
     /**
@@ -212,6 +372,29 @@ class Articles
     }
 
     /**
+     * Set page
+     *
+     * @param \Chiave\CMSBundle\Entity\Pages $page
+     * @return Articles
+     */
+    public function setPage(\Chiave\CMSBundle\Entity\Pages $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return \Chiave\CMSBundle\Entity\Pages 
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -272,28 +455,5 @@ class Articles
     public function setUpdatedTimestamps()
     {
         $this->updatedAt = new \DateTime('now');
-    }
-
-    /**
-     * Set page
-     *
-     * @param \Chiave\CMSBundle\Entity\Pages $page
-     * @return Articles
-     */
-    public function setPage(\Chiave\CMSBundle\Entity\Pages $page = null)
-    {
-        $this->page = $page;
-
-        return $this;
-    }
-
-    /**
-     * Get page
-     *
-     * @return \Chiave\CMSBundle\Entity\Pages 
-     */
-    public function getPage()
-    {
-        return $this->page;
     }
 }

@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Chiave\CMSBundle\Entity\Articles;
+
 class ArticlesType extends AbstractType
 {
         /**
@@ -16,11 +18,17 @@ class ArticlesType extends AbstractType
     {
         $now = new \DateTime('now');
         $builder
-            ->add('title')
-            ->add('shortContent')
+            ->add('header')
+            ->add('description')
+            ->add('type', 'choice', array(
+                'choices'   => Articles::getTypesArray()
+                )
+            )
+            ->add('root')
+            ->add('parent')
             ->add('content')
-            ->add('page')
             ->add('important')
+            ->add('page')
             // ->add('publicationDate')
             // 
 //<input type="text" value="2012-05-15 21:05" class="fdatetimepicker" data-date-format="yyyy-mm-dd hh:ii">
@@ -31,7 +39,8 @@ class ArticlesType extends AbstractType
                             'data-date-format'  => 'yyyy-mm-dd hh:ii:ss',
                             'value' => $now->format('Y-m-d H:i:s')
                         )
-                ))
+                )
+            )
             ->add('submit', 
                 'submit', 
                 array(

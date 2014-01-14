@@ -27,7 +27,7 @@
         {% for article in articles %}
             <tr>
                 <td>{{ loop.index }}</a></td>
-                <td>{{ article.title }}</td>
+                <td>{{ article.header }}</td>
                 <td>{{ article.page }}</td>
                 <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d H:i:s') }}{% else %}-----{% endif %}</td>
                 {# <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}

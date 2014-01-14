@@ -17,8 +17,14 @@ class PagesType extends AbstractType
         $builder
             ->add('title')
             ->add('staticContent')
-            ->add('submit', 
-                'submit', 
+            ->add('shortDescription')
+            ->add('description')
+            ->add('inMenu')
+            ->add('slug')
+            // ->add('image')
+            ->add('position')
+            ->add('submit',
+                'submit',
                 array(
                     'label' => 'Wyślij'
                 )

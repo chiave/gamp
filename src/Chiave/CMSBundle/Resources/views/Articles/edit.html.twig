@@ -24,6 +24,24 @@
 	});
     CKEDITOR.replace( '{{ edit_form.content.vars.id }}' );
 
+    $('#{{edit_form.type.vars.id}}').change(function() {
+        var url = "{{ path('cms_articles_types', {type:'__type__'}) }}";
+        $.post(
+            url.replace('__type__', $(this).val()),
+            function(data) {
+                if (data.success) {
+                    $('#{{edit_form.parent.vars.id}}').empty();
+                    $.each(data.articles, function( id, name ) {
+                      $('#{{edit_form.parent.vars.id}}').append('<option value="'+id+'">'+name+'</option>');
+                    });
+                } else {
+                    alert('Wystąpił straszny błąd :(');
+                }
+            });
+    });
+
+    $('#{{edit_form.type.vars.id}}').change();
+
 </script>
 
 {% endblock %}

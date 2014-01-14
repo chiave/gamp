@@ -3,6 +3,7 @@
 namespace Chiave\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -214,6 +215,43 @@ class ArticlesController extends Controller
         }
 
         return $this->redirect($this->generateUrl('cms_articles'));
+    }
+
+    /**
+     * Action for parent choosing based on current value of "type" field.
+     *
+     * @Route("/admin/articles/types/{type}", name="cms_articles_types")
+     * @Method("POST")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function articlesByTypeAction(Request $request, $type)
+    {
+        $result = new \stdClass();
+        $result->success = false;
+
+        // delete me?
+        $result->types = Articles::getTypesArray();
+
+        $articlesByType = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('ChiaveCMSBundle:Articles')
+            ->findBy(
+                array(
+                    'type' => $type,
+                    'root' => true
+                ),
+                array('header' => 'ASC')
+            );
+
+        $result->articles = array();
+        foreach ($articlesByType as $article) {
+            $result->articles[$article->getId()] = $article->getHeader();
+        }
+
+        $result->success = true;
+        return new JsonResponse(
+                $result
+                );
     }
 
     /**

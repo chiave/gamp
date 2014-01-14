@@ -32,6 +32,20 @@ class Pages
     /**
      * @var string
      *
+     * @ORM\Column(name="shortDescription", type="text", nullable=true)
+     */
+    private $shortDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="staticContent", type="text", nullable=true)
      */
     private $staticContent;
@@ -40,6 +54,34 @@ class Pages
      * @ORM\OneToMany(targetEntity="Articles", mappedBy="page")
      **/
     private $articles;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="inMenu", type="boolean", nullable=true)
+     */
+    private $inMenu = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=32)
+     */
+    private $slug;
+
+    // *
+    //  * @var string
+    //  *
+    //  * @ORM\Column(name="image", type="string", length=32)
+     
+    // private $image;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position;
 
     /**
      * @var \DateTime
@@ -106,6 +148,52 @@ class Pages
     }
 
     /**
+     * Set shortDescription
+     *
+     * @param string $shortDescription
+     * @return Pages
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get shortDescription
+     *
+     * @return string 
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Pages
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
      * Set staticContent
      *
      * @param string $staticContent
@@ -126,6 +214,108 @@ class Pages
     public function getStaticContent()
     {
         return $this->staticContent;
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \Chiave\CMSBundle\Entity\Articles $articles
+     * @return Pages
+     */
+    public function addArticle(\Chiave\CMSBundle\Entity\Articles $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \Chiave\CMSBundle\Entity\Articles $articles
+     */
+    public function removeArticle(\Chiave\CMSBundle\Entity\Articles $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * Set inMenu
+     *
+     * @param boolean $inMenu
+     * @return Pages
+     */
+    public function setInMenu($inMenu)
+    {
+        $this->inMenu = $inMenu;
+
+        return $this;
+    }
+
+    /**
+     * Get inMenu
+     *
+     * @return boolean 
+     */
+    public function getInMenu()
+    {
+        return $this->inMenu;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Pages
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Pages
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 
     /**
@@ -189,38 +379,5 @@ class Pages
     public function setUpdatedTimestamps()
     {
         $this->updatedAt = new \DateTime('now');
-    }
-
-    /**
-     * Add articles
-     *
-     * @param \Chiave\CMSBundle\Entity\Articles $articles
-     * @return Pages
-     */
-    public function addArticle(\Chiave\CMSBundle\Entity\Articles $articles)
-    {
-        $this->articles[] = $articles;
-
-        return $this;
-    }
-
-    /**
-     * Remove articles
-     *
-     * @param \Chiave\CMSBundle\Entity\Articles $articles
-     */
-    public function removeArticle(\Chiave\CMSBundle\Entity\Articles $articles)
-    {
-        $this->articles->removeElement($articles);
-    }
-
-    /**
-     * Get articles
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getArticles()
-    {
-        return $this->articles;
     }
 }
