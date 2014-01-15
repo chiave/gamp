@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>GAMP - {% block title %}nieruchomości{% endblock %}</title>
+        <!--title>{% block description %}Strona główna{% endblock %}</title-->
+        {% block stylesheets %}{% endblock %}
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}" />
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+        <script type="text/javascript">
+            // $(function() {
+            // });
+        </script>
+
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div class="logo">
+                    <div class="fullWrapper">
+                        <img src="{{ asset('images/logo_gamp.png') }}" />
+                    </div>
+                </div><!-- end class logo -->
+
+                <div class="fullWrapper">
+
+                    <div class="topMenu">
+                        <ul>
+                            <li class="first"><a class="singleItem" href="index.html">HOME</a></li>
+                            <li><a class="singleItem" href="o_frmie.html">O FIRMIE</a></li>
+                            <li><a href="kursy.html">KURSY<br />SZKOLENIA</a></li>
+                            <li><a class="singleItem" href="posrednictwo.html">POŚREDNICTWO</a></li>
+                            <li><a href="zarzadzanie.html">ZARZĄDZANIE<br />NIERUCHOMOŚCIAMI</a></li>
+                            <li><a href="uslugi.html">USŁUGI <br />DODATKOWE</a></li>
+                            <li class="last"><a class="singleItem" href="kontakt.html">KONTAKT</a></li>
+                        </ul>
+                    </div><!-- end topMenu class -->
+                </div><!--  end class fullWrapper for #header -->
+            </div><!-- end div header -->
+
+            <div id="content">
+                <div class="fullWrapperPad">
+                    <div class="column s7">
+                        {% block body %}{% endblock %}
+                    </div><!-- end column s7 -->
+
+                    <div class="column s3">
+                        <div class="infoBox">
+                            <h3 class="headerOrange">AKTUALNOŚCI</h3>
+
+                            <div class="item">
+                            <div class="logo">
+                            <img src="{{ asset('images/metabox3.jpg') }}" alt="logo" />
+                            </div>
+                            <div class="meta">
+                            <p>NASZA FIRMA URUCHOMIŁA NOWĄ SERIĘ SZKOLEŃ</p>
+                            <a href="">Więcej...</a>
+                            </div>
+                            <div class="date">
+                            <img src="{{ asset('images/clock_icon.png') }}" /><span>06 Stycznia 2014</span>
+                            </div>
+                            </div>
+
+                            <div class="item">
+                            <div class="logo">
+                            <img src="{{ asset('images/item1.jpg') }}" alt="logo" />
+                            </div>
+                            <div class="meta">
+                            <p>NOWO WYBUDOWANE DOMY JEDNORODZINNE GOTOWE DO SPRZEDAŻY</p>
+                            <a href="">Więcej...</a>
+                            </div>
+                            <div class="date">
+                            <img src="{{ asset('images/clock_icon.png') }}" /><span>02 Stycznia 2014</span>
+                            </div>
+                            </div>
+
+                            <div class="item">
+                            <div class="logo">
+                            <img src="{{ asset('images/item3.jpg') }}" alt="logo" />
+                            </div>
+                            <div class="meta">
+                            <p>NOWE ZDJĘCIA W NASZEJ GALERII</p>
+                            <a href="">Więcej...</a>
+                            </div>
+                            <div class="date">
+                            <img src="{{ asset('images/clock_icon.png') }}" /><span>29 Listopada 2013</span>
+                            </div>
+                            </div>
+
+                        </div><!--  end div infoBox -->
+                    </div><!-- end column s3 -->
+            </div><!--  end fullWrapperPad for content -->
+            </div><!-- end div content -->
+
+            <div id="footer">
+            </div><!--  end div footer -->
+        </div><!-- end div page -->
+
+        <script type="text/javascript">
+            {% block javascripts %}{% endblock %}
+
+            $(document).ready(function(){
+                $("#plainBoxToggle").click(function(){
+                    $('#plainBoxTarget').slideDown();
+                    $("#plainBoxToggle").hide();
+                });
+
+                $("#plainBoxToggle2").click(function(){
+                    $('#plainBoxTarget').slideUp();
+                    $("#plainBoxToggle").show();
+                });
+
+                $('#li1').click(function(){
+                    $('#li2').removeClass("active");
+                    $('#li1').addClass("active");
+                    $('#tab1').show();
+                    $("#tab2").hide();
+                });
+
+                $('#li2').click(function(){
+                    $('#li1').removeClass("active");
+                    $('#li2').addClass("active");
+                    $('#tab2').show();
+                    $("#tab1").hide();
+                });
+            });
+        </script>
+    </body>
+</html>

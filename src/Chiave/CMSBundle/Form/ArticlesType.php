@@ -19,12 +19,15 @@ class ArticlesType extends AbstractType
         $now = new \DateTime('now');
         $builder
             ->add('header')
+            ->add('shortDescription')
             ->add('description')
+            ->add('staticContent')
             ->add('type', 'choice', array(
                 'choices'   => Articles::getTypesArray()
                 )
             )
             ->add('root')
+            ->add('expandable')
             ->add('parent')
             ->add('content')
             ->add('important')

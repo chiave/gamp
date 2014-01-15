@@ -36,9 +36,23 @@ class Articles
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="shortDescription", type="text", nullable=true)
+     */
+    private $shortDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="staticContent", type="text", nullable=true)
+     */
+    private $staticContent;
 
     /**
      * @var integer
@@ -53,6 +67,13 @@ class Articles
      * @ORM\Column(name="root", type="boolean", nullable=true)
      */
     private $root = false;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="expandable", type="boolean", nullable=true)
+     */
+    private $expandable = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="Articles", inversedBy="childrens")
@@ -153,6 +174,29 @@ class Articles
     }
 
     /**
+     * Set shortDescription
+     *
+     * @param string $shortDescription
+     * @return Articles
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get shortDescription
+     *
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
@@ -176,17 +220,26 @@ class Articles
     }
 
     /**
-     * Get all types
+     * Set staticContent
      *
-     * @return array
+     * @param string $staticContent
+     * @return Pages
      */
-    public static function getTypesArray()
+    public function setStaticContent($staticContent)
     {
-        return array(
-            0 => 'wpis',
-            1 => 'lista',
-            2 => 'zakładka',
-        );
+        $this->staticContent = $staticContent;
+
+        return $this;
+    }
+
+    /**
+     * Get staticContent
+     *
+     * @return string 
+     */
+    public function getStaticContent()
+    {
+        return $this->staticContent;
     }
 
     /**
@@ -213,6 +266,20 @@ class Articles
     }
 
     /**
+     * Get all types
+     *
+     * @return array
+     */
+    public static function getTypesArray()
+    {
+        return array(
+            0 => 'wpis',
+            1 => 'lista',
+            2 => 'zakładka',
+        );
+    }
+
+    /**
      * Set root
      *
      * @param boolean $root
@@ -236,14 +303,26 @@ class Articles
     }
 
     /**
-     * Is root
+     * Set expandable
      *
-     * @param boolean $root
+     * @param boolean $expandable
      * @return Articles
      */
-    public function isRoot($root)
+    public function setExpandable($expandable)
     {
-        return $this->root ? true : false;
+        $this->expandable = $expandable;
+
+        return $this;
+    }
+
+    /**
+     * Get expandable
+     *
+     * @return boolean
+     */
+    public function getExpandable()
+    {
+        return $this->expandable;
     }
 
     /**
