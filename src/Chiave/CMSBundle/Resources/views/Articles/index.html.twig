@@ -16,6 +16,7 @@
                 <th>Lp.</th>
                 <th>Tytuł</th>
                 <th>Strona</th>
+                <th>#Artykuły#</th>
                 <th>Publikacja</th>
                 {# <th>Utworzony</th> #}
                 <th>Edytowany</th>
@@ -29,6 +30,11 @@
                 <td>{{ loop.index }}</a></td>
                 <td>{{ article.header }}</td>
                 <td>{{ article.page }}</td>
+                <td>
+                {% for art in article.childrens %}
+                    {{ art.id }};<br />
+                {% endfor %}
+                </td>
                 <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d H:i:s') }}{% else %}-----{% endif %}</td>
                 {# <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
                 <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>

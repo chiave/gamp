@@ -4,6 +4,7 @@ namespace Chiave\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+// TODO: make some true constants!!
 const TYPE_REGULAR  = 0;
 const TYPE_LIST     = 1;
 const TYPE_TAB      = 2;
@@ -17,6 +18,7 @@ const TYPE_TAB      = 2;
  */
 class Articles
 {
+
     /**
      * @var integer
      *
@@ -34,6 +36,7 @@ class Articles
     private $header;
 
     /**
+     * Data's for sidebar
      * @var string
      *
      * @ORM\Column(name="shortDescription", type="text", nullable=true)
@@ -41,13 +44,7 @@ class Articles
     private $shortDescription;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
-
-    /**
+     * Hardcoded, short intro for acticles.
      * @var string
      *
      * @ORM\Column(name="staticContent", type="text", nullable=true)
@@ -64,20 +61,13 @@ class Articles
     /**
      * @var boolean
      *
-     * @ORM\Column(name="root", type="boolean", nullable=true)
-     */
-    private $root = false;
-
-    /**
-     * @var boolean
-     *
      * @ORM\Column(name="expandable", type="boolean", nullable=true)
      */
     private $expandable = false;
 
     /**
      * @ORM\ManyToOne(targetEntity="Articles", inversedBy="childrens")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
     private $parent;
 
@@ -127,6 +117,12 @@ class Articles
      */
     private $updatedAt;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="root", type="boolean", nullable=true)
+     */
+    private $root = false;
 
     /**
      * To string
@@ -197,29 +193,6 @@ class Articles
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
-     * @return Articles
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
      * Set staticContent
      *
      * @param string $staticContent
@@ -277,29 +250,6 @@ class Articles
             1 => 'lista',
             2 => 'zakładka',
         );
-    }
-
-    /**
-     * Set root
-     *
-     * @param boolean $root
-     * @return Articles
-     */
-    public function setRoot($root)
-    {
-        $this->root = $root;
-
-        return $this;
-    }
-
-    /**
-     * Get root
-     *
-     * @return boolean 
-     */
-    public function getRoot()
-    {
-        return $this->root;
     }
 
     /**
@@ -534,5 +484,32 @@ class Articles
     public function setUpdatedTimestamps()
     {
         $this->updatedAt = new \DateTime('now');
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    private function setRoot()
+    {
+        if ($this->type == TYPE_REGULAR
+            // || $this->page != null
+            || $this->parent == null
+            || $this->childrens != null
+            ) {
+            $this->root = true;
+        }
+
+        $this->root = false;
+    }
+
+    /**
+     * Is root
+     *
+     * @return boolean 
+     */
+    public function isRoot()
+    {
+        return $this->root;
     }
 }

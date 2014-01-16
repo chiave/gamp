@@ -1,7 +1,7 @@
 {% extends "ChiaveCoreBundle::frontendbase.html.twig" %}
 
 {% block body -%}
-    {% for article in page.articles if article.getRoot %}
+    {% for article in page.articles %}
         {% if article.type == 0 and not article.getExpandable %}
             {# regular article #}
             <div class="plainMeta borderBottomGrey">
@@ -12,7 +12,7 @@
             {# expandable regular article #}
             <div class="plainMeta borderBottomGrey">
                 <h1 class="headerOrangeBold">{{ article.header }}</h1>
-                <p>{{ article.description }}</p>
+                <p>{{ article.staticContent }}</p>
                 <span id="plainBoxToggle">więcej...</span>
                 <div id="plainBoxTarget">
                     {{ article.content | raw }}

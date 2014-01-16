@@ -30,7 +30,7 @@
             url.replace('__type__', $(this).val()),
             function(data) {
                 if (data.success) {
-                    $('#{{edit_form.parent.vars.id}}').empty();
+                    $('#{{edit_form.parent.vars.id}}').empty().append('<option value=""></option>');
                     $.each(data.articles, function( id, name ) {
                       $('#{{edit_form.parent.vars.id}}').append('<option value="'+id+'">'+name+'</option>');
                     });
@@ -39,6 +39,11 @@
                 }
             });
     });
+
+    //hide page if parent is choosen
+    //hide parent if page is choosen
+    //hide parent if type == 0 is choosen
+    //
 
     $('#{{edit_form.type.vars.id}}').change();
 
