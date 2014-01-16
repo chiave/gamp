@@ -29,7 +29,7 @@
             url.replace('__type__', $(this).val()),
             function(data) {
                 if (data.success) {
-                    $('#{{form.parent.vars.id}}').empty();
+                    $('#{{form.parent.vars.id}}').empty().append('<option value="0"></option>');
                     $.each(data.articles, function( id, name ) {
                       $('#{{form.parent.vars.id}}').append('<option value="'+id+'">'+name+'</option>');
                     });

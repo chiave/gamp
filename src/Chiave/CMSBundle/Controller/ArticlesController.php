@@ -229,24 +229,23 @@ class ArticlesController extends Controller
         $result = new \stdClass();
         $result->success = false;
 
-        // delete me?
-        $result->types = Articles::getTypesArray();
-
-        $articlesByType = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('ChiaveCMSBundle:Articles')
-            ->findBy(
-                array(
-                    'type' => $type,
-                    'root' => true
-                ),
-                array('header' => 'ASC')
-            );
-
         $result->articles = array();
-        foreach ($articlesByType as $article) {
-            $result->articles[$article->getId()] = $article->getHeader();
-        }
+        //if ($type != 0) { // TODO: insert TYPE_REGULAR contant here
+            $articlesByType = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('ChiaveCMSBundle:Articles')
+                ->findBy(
+                    array(
+                        'type' => $type,
+                        'parent' => null,
+                    ),
+                    array('header' => 'ASC')
+                );
+
+            foreach ($articlesByType as $article) {
+                $result->articles[$article->getId()] = $article->getHeader();
+            }
+        //}
 
         $result->success = true;
         return new JsonResponse(
@@ -262,7 +261,7 @@ class ArticlesController extends Controller
     *
     * @return \Symfony\Component\Form\Form Form for page
     */
-    public function createArticleForm(Articles $article, $route)
+    private function createArticleForm(Articles $article, $route)
     {
         return $this->createForm(
             new ArticlesType(),

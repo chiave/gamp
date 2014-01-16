@@ -20,15 +20,16 @@ class ArticlesType extends AbstractType
         $builder
             ->add('header')
             ->add('shortDescription')
-            ->add('description')
             ->add('staticContent')
             ->add('type', 'choice', array(
                 'choices'   => Articles::getTypesArray()
                 )
             )
-            ->add('root')
             ->add('expandable')
-            ->add('parent')
+            ->add('parent', null, array(
+                'required' => false,
+                )
+            )
             ->add('content')
             ->add('important')
             ->add('page')

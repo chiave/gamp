@@ -16,9 +16,8 @@ class PagesType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('staticContent')
             ->add('shortDescription')
-            ->add('description')
+            ->add('staticContent')
             ->add('inMenu')
             ->add('slug')
             // ->add('image')

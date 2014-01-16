@@ -39,13 +39,6 @@ class Pages
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="staticContent", type="text", nullable=true)
      */
     private $staticContent;
@@ -168,29 +161,6 @@ class Pages
     public function getShortDescription()
     {
         return $this->shortDescription;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Pages
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
