@@ -12,112 +12,78 @@
         <link rel="stylesheet" href="{{ asset('bundles/chiavecore/css/backend.css') }}" />
         <script src="{{ asset('bundles/chiavecore/js/modernizr.js') }}"></script>
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="{{ asset('bundles/chiavecore/js/foundation.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 
         <script src="{{ asset('bundles/chiavecore/js/foundation-datetimepicker.js') }}"></script>
         <link href="{{ asset('bundles/chiavecore/stylesheets/foundation-datepicker.css') }}" rel="stylesheet">
 
-        <script type="text/javascript">
-            // $(function() {
-            // });
-        </script>
-
+        {# <script src="{{ asset('bundles/chiavecore/js/vendor/jquery.js') }}"></script> #}
+    <script src="{{ asset('bundles/chiavecore/js/vendor/fastclick.js') }}"></script>
     </head>
     <body>
-    <nav data-topbar="" class="top-bar hide-for-small">
-          <ul class="title-area">
+    <nav class="top-bar" data-topbar>
+        <ul class="title-area">
             <li class="name">
-              <h1><a href="">GAMP</a></h1>
+                <h1><a href="#">GAMP</a></h1>
             </li>
-          </ul>
-
+            {# Wyświetli się dla tragicznie małych ekranów #}
+            <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+        </ul>
         <section class="top-bar-section">
+            <!-- Right Nav Section -->
             <ul class="right">
-              <li class="divider"></li>
-              <li class="has-dropdown not-click">
-                <a class="" href="features.html">Learn</a>
-                <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">Back</a></h5></li>
-                  <li><a href="features.html">Features</a></li>
-                  <li><a href="faq.html">FAQ</a></li>
-                  <li><a href="case-washington-post.html">Case Studies</a></li>
-                  <li><a href="website-examples.html">Website Examples</a></li>
-                  <li><a href="video-started-with-foundation.html">Videos</a></li>
-                  <li><a href="training.html">Training</a></li>
-                  <li><a href="about.html">About</a></li>
-                </ul>
-              </li>
-              <li class="divider"></li>
-              <li class="has-dropdown not-click">
-                <a class="" href="../templates.html">Develop</a>
-                <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">Back</a></h5></li>
-                  <li><a href="../templates.html">Add-ons</a></li>
-                  <li><a href="/docs">Docs</a></li>
-                  <li><a href="../develop/download.html">Download</a></li>
-                  <li><a href="../develop/contribute.html">Contribute</a></li>
-                  <li><a href="../develop/tools.html">Tools</a></li>
-                </ul>
-              </li>
-              <li class="divider"></li>
-              <li class="has-dropdown not-click">
-                <a class="" href="../support/support.html">Support</a>
-                <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">Back</a></h5></li>
-                  <li><a href="../support/support.html">Support Channels</a></li>
-                  <li><a href="/forum">Foundation Forum</a></li>
-                  <li><a href="../support/images-and-badges.html">Images &amp; Badges</a></li>
-                </ul>
-              </li>
-              <li class="divider"></li>
-              <li class="has-dropdown not-click">
-                <a class="" href="../business/services.html">Business</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a class="" href="/docs">Docs</a>
-              </li>
-              <li class="divider"></li>
-              <li class="has-form">
-                <a class="small button" href="/docs">Getting Started</a>
-            </li></ul>
+                <li class="has-dropdown">
+                    <a href="#">Użytkownik</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Wyloguj</a></li>
+                    </ul>
+                </li>
+            </ul>
         </section>
     </nav>
 
     <section role="main">
+        <div class="row header-intro">
+            <header>
+                <h1>{{ block('title')}}</h1>
+                <h4>{{ block('description') }}</h4>
+            </header>
+        </div>
+
+        {% set active = block('active_name') %}
         <div class="row">
-            <div class="large-3 medium-2 columns">
-                <h4>Menu boczne</h4>
-                <ul>
-                    <li><a href="{{ path('cms_pages') }}">
-                        Strony
-                    </a></li>
-                    <li><a href="{{ path('cms_articles') }}">
-                        Wpisy
-                    </a></li>
-                </ul>
+            <div class="medium-3 columns">
+                <nav class="sidebar">
+                    <ul class="side-nav">
+                        <li><h6><strong>Menu boczne</strong></h6></li>
+                        <li class="divider"></li>
+                        <li {% if active == "cms_pages" %}class="active"{% endif %}>
+                            <a href="{{ path('cms_pages') }}">Strony</a>
+                        </li>
+                        <li {% if active == "cms_articles" %}class="active"{% endif %}>
+                            <a href="{{ path('cms_articles') }}">Wpisy</a>
+                        </li>
+                        {# <li><a href="#">Link 2</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Link 3</a></li>
+                        <li><a href="#">Link 4</a></li> #}
+                    </ul>
+                </nav>
             </div>
-            <div class="large-9 medium-8 columns">
-                <div class="large-12 medium-11">
-                    <header>
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <h1>{{ block('title') }}</h1>
-                                <h4>{{ block('description') }}</h4>
-                            </div>
-                        </div>
-                    </header>
-                </div>
-                <div class="large-12 medium-11">
-                    {% block body %}{% endblock %}
-                    {% block javascripts %}{% endblock %}
-                </div>
+            <div class="medium-9 columns">
+                {% block body %}{% endblock %}
+                {% block javascripts %}{% endblock %}
             </div>
         </div>
     </section>
 
-    <script>
-                  // $(document).foundation();
-                  // $('.datetimepicker').fdatepicker();
+    <script src="{{ asset('bundles/chiavecore/js/foundation.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).foundation();
+
+        $(function() {
+        });
     </script>
   </body>
 </html>

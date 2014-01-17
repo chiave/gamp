@@ -3,12 +3,9 @@
 {% block title %}Zarządzanie stronami{% endblock %}
 {% block description %}lista stron{% endblock %}
 
+{% block active_name %}cms_pages{% endblock %}
+
 {% block body -%}
-    <div class="row">
-        <a class="button success right" href="{{ path('cms_pages_new') }}">
-            Utwórz nową stronę
-        </a>
-    </div>
     <table class="records_list">
         <thead>
             <tr>
@@ -18,7 +15,11 @@
                 {# <th>Utworzona</th> #}
                 <th>Edytowana</th>
                 <th>Wpisów</th>
-                <th></th>
+                <th>
+                    <a class="tiny button success" href="{{ path('cms_pages_new') }}">
+                        Utwórz nową stronę
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>

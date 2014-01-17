@@ -3,10 +3,12 @@
 {% block title %}Zarządzanie artykułami{% endblock %}
 {% block description %}edycja artykułu{% endblock %}
 
+{% block active_name %}cms_articles{% endblock %}
+
 {% block body -%}
 
     {{ form(edit_form) }}
-	
+
     <a class="button small" href="{{ path('cms_articles') }}">
         Powrót do listy artykułów
     </a>

@@ -1,3 +1,33 @@
 .records_list th:last-child {
-	min-width: 170px;
+    min-width: 170px;
+}
+
+.sidebar {
+    background: none repeat scroll 0 center rgb(245, 245, 245);
+    margin: 0 10px;
+    border: 1px solid #DDDDDD;
+}
+
+.sidebar li {
+    padding-left: 20px;
+}
+.sidebar li.divider {
+    padding: 0 !important;
+}
+
+
+.sidebar li.active {
+    /* background for sidebar maybe? */
+}
+
+.sidebar  li.active a:first-child {
+}
+
+.header-intro {
+    padding: 10px 20px;
+    /* insert background image here */
+}
+
+th .button {
+    margin: 0;
 }

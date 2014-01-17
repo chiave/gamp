@@ -3,13 +3,9 @@
 {% block title %}Zarządzanie artykułami{% endblock %}
 {% block description %}lista artykułów{% endblock %}
 
-{% block body -%}
-    <div class="row">
-        <a class="button success right" href="{{ path('cms_articles_new') }}">
-            Utwórz nowy artykuł
-        </a>
-    </div>
+{% block active_name %}cms_articles{% endblock %}
 
+{% block body -%}
     <table class="records_list">
         <thead>
             <tr>
@@ -21,7 +17,11 @@
                 {# <th>Utworzony</th> #}
                 <th>Edytowany</th>
                 <th>Ważny</th>
-                <th></th>
+                <th>
+                    <a class="tiny button success" href="{{ path('cms_articles_new') }}">
+                        Utwórz nowy artykuł
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>
