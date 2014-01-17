@@ -420,7 +420,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	font-weight:lighter;
 	font-size:16px;
 	padding:5px;
-	line-height:21px;;
+	line-height:21px;
+	display:table-cell;
+	vertical-align: middle;
+	height:88px;
+}
+.boxWrapper .metaBox .bottom h6 span
+{
+	font-size:12px;
+	font-style: italic;
 }
 
 /* ------------------------------------- styles for slideList------------------- */
