@@ -7,8 +7,11 @@ body, html
 }
 body
 {
-	   background:#E2E2E2;
-	
+	  background-image: url(images/background_image.jpg);
+	 background-repeat: no-repeat;
+	 background-size:100% 100%;
+	 background-attachment: fixed;
+    	  	
 }
 
 .fullWrapper
@@ -30,6 +33,7 @@ body
 	min-height:100%;
 	position:relative;
 	color: #464646;
+	background:url(images/page_bg.png);
 }
 #header
 {
@@ -48,8 +52,8 @@ body
 	bottom:0px;
 	height:60px;
 	width:100%;
-	background:url(images/footer_bg.png);
-	border-top: 1px groove #D1D1D1;
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
+	border-top: 1px solid #D1D1D1;
 }
 /*--------------------------------------------------------------------------*/
 
@@ -112,7 +116,7 @@ body
 #header .logo
 {
 	width:100%;
-	border-bottom:1px groove #D1D1D1;
+	border-bottom:1px solid #D1D1D1;
 	padding:5px 0px;
 	background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
@@ -147,7 +151,7 @@ body
 {
 	height:90px;
 	position:relative;
-	margin-top:-10px;
+	margin-top:5px;
 }
 .topMenu li
 {
@@ -170,8 +174,8 @@ body
 	display:block;
 	font-size:12px;
 	margin:auto;
-	line-height:20px;
-	padding:10px 5px;
+	line-height:17px;
+	padding:12px 5px;
 }	
 
 
@@ -206,10 +210,11 @@ body
 .infoBox
 {
 	width:258px;
-	border: 1px groove #D1D1D1;
+	border: 1px solid #D1D1D1;
 	-webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow:    1px 1px 3px 0px rgba(0, 0, 0, 1);
 	box-shadow:         1px 1px 3px 0px rgba(0, 0, 0, 1);
+	background:white;
 }
 .infoBox .item
 {
@@ -254,7 +259,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	color:#464646;
 	font-weight:lighter;
 	font-size:13px;
-	line-height:16px;
+	line-height:18px;
 }
 .infoBox .item .meta a
 {
@@ -287,7 +292,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 /* ----------------------------------------------------------------------- */
 .borderBottomGrey
 {
-	border-bottom:1px groove #D1D1D1;
+	border-bottom:1px solid #D1D1D1;
 }
 /*------------------------------------headers--------------------------------------*/
 .headerSilver
@@ -318,6 +323,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	font-weight: bold;
 	font-size:16px;	
 	padding:20px 0px 10px 0px;
+	font-weight: lighter;
 }
 
 .headerNews
@@ -329,6 +335,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	font-size:18px;
     background: url(images/bg-nav.jpg) 0 0 repeat-x;
     font-weight:lighter;
+    margin-bottom:30px;
+    border-radius:3px;
 }
 
 .headerContent
@@ -357,7 +365,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .boxWrapper .metaBox
 {
 	width:300px;
-	height:300px;
+	height:298px;
 	margin-right: 20px;
 	margin-bottom:20px;
 	float:left;
@@ -365,7 +373,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	-webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow:    1px 1px 3px 0px rgba(0, 0, 0, 1);
 	box-shadow:         1px 1px 3px 0px rgba(0, 0, 0, 1);
-	border: 1px groove #D1D1D1;
+	border: 1px solid #D1D1D1;
 }
 .boxWrapper .metaBox img
 {
@@ -379,13 +387,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	width:100%;
 	height:57px;
-	background: url(images/news_bg.png);
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	position:absolute;
 	top:0;
 	}
 .boxWrapper .metaBox .top h2
 {
-	font-size: 18px;
+	font-size: 16px;
+	line-height:21px;
 	font-weight:lighter;
 	color: #AC5896;
 	display: table-cell;
@@ -399,18 +408,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .boxWrapper .metaBox .bottom
 {
 	width:100%;
-	height:90px;
-	background: url(images/news_bg.png);
+	height:88px;
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	position:absolute;
-	bottom:0;
+	bottom:0px;
+	overflow:hidden;
 }
 .boxWrapper .metaBox .bottom h6
 {
 	color:#CFC9C9;
 	font-weight:lighter;
-	font-size:14px;
-	padding:10px;
-	line-height:18px;;
+	font-size:16px;
+	padding:5px;
+	line-height:21px;;
 }
 
 /* ------------------------------------- styles for slideList------------------- */
@@ -424,7 +434,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	margin-top:3px;
 	border-radius:5px;
 	background: url(images/bg-nav.jpg) 0 0 repeat-x;
-	border: 1px groove #D1D1D1;
+	border: 1px solid #D1D1D1;
 	-webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
 	box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
@@ -433,11 +443,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 .slideList .listToggle h4
 {
-	text-align: center;
+	text-align: left;
 	font-size:16px;
 	font-weight: lighter;
 	width:540px;
-	padding:18px 0px;
+	padding:18px 15px;
 }
 .slideList .listToggle:HOVER
  {
@@ -457,13 +467,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	padding:20px;
 	width:577px;
-	background: url(images/footer_bg.png);
 	-webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
 	box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
-	border-left: 1px groove #D1D1D1;
-	border-right: 1px groove #D1D1D1;
+	border-left: 1px solid #D1D1D1;
+	border-right: 1px solid #D1D1D1;
 	display:none;
+	background: url(images/plainMeta_bg.png);
 }
 .slideList .more p
 {
@@ -471,7 +481,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	background-position: top-left;
 	background-repeat: no-repeat;
 	padding:0px 10px 10px 25px;
-	font-size:15px;
+	font-size:16px;
+	line-height: 21px;
 	
 }
 .slideList .more .hide
@@ -485,13 +496,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 }
 .slideList .last
 {
-	border-bottom: 1px groove #D1D1D1;
+	border-bottom: 1px solid #D1D1D1;
 }
 
 .listBox
 {
 	padding:20px;
-	border-top: 1px groove #D1D1D1;
+	border-top: 1px solid #D1D1D1;
 }
 .listBox p
 {
@@ -510,6 +521,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	padding:0px 20px 20px 20px;
 	margin-bottom:10px;
+	background:url(images/plainMeta_bg.png);
+	border-radius:5px;
 }
 
 .plainMeta p
@@ -517,7 +530,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	font-size:16px;
 	color:#464646;
 	padding:7px 10px 10px 0px;;
-	line-height:20px;
+	line-height:21px;
 }
 .plainMeta span
 {
@@ -531,21 +544,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .plainMeta .map
 {
 	width:100%;
-	background: url(images/footer_bg.png);
 	padding:15px 0px;
 }
 .plainMeta .map img
 {
-	width:500px;
-	height:300px;
+	width:600px;
+	height:350px;
 	margin:0px auto;
 	display:block;
 }
 .plainMeta h3
 {
-	padding:7px 25px;
+	padding:3px 25px;
 	color: #464646;
-	font-size:18px;
+	font-size:16px;
 	line-height:24px;
 	font-weight: lighter;
 }
@@ -587,12 +599,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	padding:25px 15px;
 	overflow:hidden;
+	background: url(images/plainMeta_bg.png);
+	border-radius:5px;
 }
 .tabWrapper ul
 {
 	display:block;
-	width:615px;
-	border-bottom:1px groove #D1D1D1;
+	width:600px;
+	border-bottom:1px solid #D1D1D1;
 	height:27px;
 	padding-left:25px;
 }
@@ -603,9 +617,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	display:inline;
 	font-size: 14px;
 	padding:10px;
-	border-left:1px groove #D1D1D1;
-	border-right:1px groove #D1D1D1;
-	border-top:1px groove #D1D1D1;
+	border-left:1px solid #D1D1D1;
+	border-right:1px solid #D1D1D1;
+	border-top:1px solid #D1D1D1;
 	background:#888;	
 }
 .tabWrapper li:HOVER
@@ -623,12 +637,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	background-position: top-left;
 	background-repeat: no-repeat;
 	padding: 0px 10px 10px 25px;
-	font-size: 15px;
+	font-size: 16px;
+	line-height:21px;
 }
 .tabWrapper .plainMeta span
 {
 	padding: 0px 10px 10px 25px;
-	font-size: 15px;
+	font-size: 16px;
+	line-height:21px;
 	text-align: left;
 	color: #464646;	
 }
@@ -639,11 +655,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 #tab1
 {
 	
-	border-bottom:1px groove #D1D1D1;	
+	border-bottom:1px solid #D1D1D1;	
 }
 #tab2
 {
-	border-bottom:1px groove #D1D1D1;	
+	border-bottom:1px solid #D1D1D1;	
 	display:none;	
 }
 /*--------------------------------------------------------------------- */
