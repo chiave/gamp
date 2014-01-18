@@ -1,0 +1,21 @@
+    <div class="infoBox">
+        <h3 class="headerOrange">AKTUALNOŚCI</h3>
+        {% for article in importantArticles %}
+        <div class="item">
+            <div class="logo">
+                <img alt="logo" src="/gamp/web/images/metabox3.jpg">
+            </div>
+            <div class="meta">
+                <p>{{ article.shortDescription }}</p>
+                <a href="">Więcej...</a>
+            </div>
+            <div class="date">
+                <img src="/gamp/web/images/clock_icon.png">
+                <span>
+                    {# 06 Stycznia 2014 #}
+                    {{ article.publicationDate | date('d F Y') }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div><!--  end div infoBox -->
