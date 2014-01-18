@@ -48,49 +48,7 @@
                     </div><!-- end column s7 -->
 
                     <div class="column s3">
-                        <div class="infoBox">
-                            <h3 class="headerOrange">AKTUALNOŚCI</h3>
-
-                            <div class="item">
-                            <div class="logo">
-                            <img src="{{ asset('images/metabox3.jpg') }}" alt="logo" />
-                            </div>
-                            <div class="meta">
-                            <p>NASZA FIRMA URUCHOMIŁA NOWĄ SERIĘ SZKOLEŃ</p>
-                            <a href="">Więcej...</a>
-                            </div>
-                            <div class="date">
-                            <img src="{{ asset('images/clock_icon.png') }}" /><span>06 Stycznia 2014</span>
-                            </div>
-                            </div>
-
-                            <div class="item">
-                            <div class="logo">
-                            <img src="{{ asset('images/item1.jpg') }}" alt="logo" />
-                            </div>
-                            <div class="meta">
-                            <p>NOWO WYBUDOWANE DOMY JEDNORODZINNE GOTOWE DO SPRZEDAŻY</p>
-                            <a href="">Więcej...</a>
-                            </div>
-                            <div class="date">
-                            <img src="{{ asset('images/clock_icon.png') }}" /><span>02 Stycznia 2014</span>
-                            </div>
-                            </div>
-
-                            <div class="item">
-                            <div class="logo">
-                            <img src="{{ asset('images/item3.jpg') }}" alt="logo" />
-                            </div>
-                            <div class="meta">
-                            <p>NOWE ZDJĘCIA W NASZEJ GALERII</p>
-                            <a href="">Więcej...</a>
-                            </div>
-                            <div class="date">
-                            <img src="{{ asset('images/clock_icon.png') }}" /><span>29 Listopada 2013</span>
-                            </div>
-                            </div>
-
-                        </div><!--  end div infoBox -->
+                        {{ render(controller('ChiaveCMSBundle:Articles:importantArticles')) }}
                     </div><!-- end column s3 -->
             </div><!--  end fullWrapperPad for content -->
             </div><!-- end div content -->

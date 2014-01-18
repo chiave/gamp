@@ -254,6 +254,28 @@ class ArticlesController extends Controller
     }
 
     /**
+     * Get latest n important articles.
+     *
+     * @Route("/admin/articles/important/{amount}", name="cms_articles_important")
+     * @Method("GET")
+     * @Template()
+     */
+    public function importantArticlesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $importantArticles = $em->getRepository('ChiaveCMSBundle:Articles')
+            ->findBy(
+                     array('important' => true),
+                     array('createdAt' => 'DESC')
+             );
+
+        return array(
+            'importantArticles' => $importantArticles,
+        );
+    }
+
+    /**
     * Creates a form for article.
     *
     * @param Articles $article
