@@ -1,0 +1,44 @@
+{% extends "ChiaveCoreBundle::backendbase.html.twig" %}
+
+{% block title %}Zarządzanie stronami{% endblock %}
+{% block description %}lista wiadomości{% endblock %}
+
+{% block active_name %}cms_mails{% endblock %}
+
+
+{% block body -%}
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nadawca</th>
+                <th>E-mail</th>
+                <th>Telefon</th>
+                <th>Z dnia</th>
+                <th>Wiadomość</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mail in mails %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ mail.firstname }} {{ mail.lastname }}</td>
+                <td>{{ mail.email }}</td>
+                <td>{{ mail.phone }}</td>
+                <td>{{ mail.createdAt|date('Y-m-d H:i:s') }}</td>
+                <td>{{ mail.message }}</td>
+                <td>
+                    <div class="button-bar">
+                        <ul class="button-group">
+                            <li><a class="tiny button" href="{{ path('cms_mails_show', { 'id': mail.id }) }}">Pokaż</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

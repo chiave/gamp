@@ -66,7 +66,7 @@ class Pages
     //  * @var string
     //  *
     //  * @ORM\Column(name="image", type="string", length=32)
-     
+
     // private $image;
 
     /**
@@ -75,6 +75,13 @@ class Pages
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="contactForm", type="boolean", nullable=true)
+     */
+    private $contactForm;
 
     /**
      * @var \DateTime
@@ -110,7 +117,7 @@ class Pages
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -133,7 +140,7 @@ class Pages
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -156,7 +163,7 @@ class Pages
     /**
      * Get shortDescription
      *
-     * @return string 
+     * @return string
      */
     public function getShortDescription()
     {
@@ -179,7 +186,7 @@ class Pages
     /**
      * Get staticContent
      *
-     * @return string 
+     * @return string
      */
     public function getStaticContent()
     {
@@ -212,7 +219,7 @@ class Pages
     /**
      * Get articles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getArticles()
     {
@@ -235,7 +242,7 @@ class Pages
     /**
      * Get inMenu
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getInMenu()
     {
@@ -258,7 +265,7 @@ class Pages
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -281,11 +288,34 @@ class Pages
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set contactForm
+     *
+     * @param boolean $contactForm
+     * @return Pages
+     */
+    public function setContactForm($contactForm)
+    {
+        $this->contactForm = $contactForm;
+
+        return $this;
+    }
+
+    /**
+     * Get contactForm
+     *
+     * @return boolean
+     */
+    public function getContactForm()
+    {
+        return $this->contactForm;
     }
 
     /**
@@ -304,7 +334,7 @@ class Pages
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -336,7 +366,7 @@ class Pages
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

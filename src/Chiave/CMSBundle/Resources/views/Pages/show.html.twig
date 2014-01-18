@@ -67,4 +67,55 @@
         </div>
         #}
     {% endfor %}
+    {% if page.contactForm %}
+        <div class="tabWrapper">
+            <ul>
+                <li id="li1" class="active">FORMULARZ KONTAKTOWY</li>
+                <li id="li2">FORMULARZ ZGŁOSZENIOWY</li>
+            </ul>
+            <div id="tab1" style="display: block;">
+                <div id="contactForm" class="contactForm">
+                {{ render(controller('ChiaveCMSBundle:Mails:renderForm', {'type':'contact'})) }}
+                </div>
+            </div>
+            <div id="tab2" style="display: none;">
+                <div id="raportForm"class="contactForm">
+                {{ render(controller('ChiaveCMSBundle:Mails:renderForm', {'type':'raport'})) }}
+                </div>
+            </div>
+        </div><!-- end tabWrapper -->
+
+        <script>
+            $('form').submit(function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var formId = $(this).parent().attr('id');
+                var type;
+                if (formId == 'contactForm') {
+                    type = 'contact';
+                } else if (formId == 'raportForm') {
+                    type = 'raport';
+                }
+
+                var url = "{{ path('cms_mails_persist', {type:'__type__'}) }}";
+
+                $.post(
+                    url.replace('__type__', type),
+                    $(this).serialize(),
+                    function(data) {
+                        console.log(data);
+                        $('.form-msg').remove();
+                        if (data.success) {
+                            $(form)[0].reset();
+                            $(form).before('<p class="form-msg form-success">Wiadomość została wysłana poprawnie.</p>');
+                        } else {
+                            $(form).before('<p class="form-msg form-error">Coś poszło nie tak. Spróbuj ponownie później.</p>');
+                        }
+                    }
+                );
+
+            });
+        </script>
+    {% endif %}
 {% endblock %}
+

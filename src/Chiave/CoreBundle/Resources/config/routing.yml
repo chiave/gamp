@@ -1,3 +1,0 @@
-admin_dashboard:
-    pattern: /admin
-    defaults: { _controller: ChiaveCoreBundle:Dashboard:index }

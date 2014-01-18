@@ -6,23 +6,33 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PagesType extends AbstractType
+class MailsType extends AbstractType
 {
-        /**
+    protected $type;
+
+    public function __construct ($type)
+    {
+        $this->type = $type;
+    }
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $type = $this->type;
+
         $builder
-            ->add('title')
-            ->add('shortDescription')
-            ->add('staticContent')
-            ->add('inMenu')
-            ->add('slug')
-            // ->add('image')
-            ->add('position')
-            ->add('contactForm')
+            ->add('firstname')
+            ->add('lastname');
+
+        if ($type == "contact") {
+            $builder->add('email');
+        } elseif ($type == "raport") {
+            $builder->add('phone');
+        }
+
+        $builder->add('message')
             ->add('submit',
                 'submit',
                 array(
@@ -38,7 +48,7 @@ class PagesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Chiave\CMSBundle\Entity\Pages'
+            'data_class' => 'Chiave\CMSBundle\Entity\Mails'
         ));
     }
 
@@ -47,6 +57,6 @@ class PagesType extends AbstractType
      */
     public function getName()
     {
-        return 'chiave_cmsbundle_pages';
+        return 'chiave_cmsbundle_mails_raport';
     }
 }
