@@ -1,3 +1,14 @@
+.login-ext {
+    text-align: center;
+}
+
+.login-int {
+    margin: auto;
+    text-align: left;
+    width: 200px;
+    display: block;
+}
+
 .records_list th:last-child {
     min-width: 170px;
 }
