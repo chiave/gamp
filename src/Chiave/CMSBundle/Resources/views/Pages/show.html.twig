@@ -5,13 +5,13 @@
         {% if article.type == 0 and not article.getExpandable %}
             {# regular article #}
             <div class="plainMeta borderBottomGrey">
-                <h1 class="headerOrange2">{{ article.header }}</h1>
+                <h1 class="mainHeader">{{ article.header }}</h1>
                 {{ article.content | raw }}
             </div>
         {% elseif article.type == 0 and article.getExpandable %}
             {# expandable regular article #}
             <div class="plainMeta borderBottomGrey">
-                <h1 class="headerOrangeBold">{{ article.header }}</h1>
+                <h1 class="mainHeader">{{ article.header }}</h1>
                 <p>{{ article.staticContent }}</p>
                 <span id="plainBoxToggle">więcej...</span>
                 <div id="plainBoxTarget">
@@ -23,7 +23,7 @@
             {# list #}
             <div class="slideList">
                 <div class="toggleWrapper">
-                    <h1 class='headerOrange2'>{{ article.header }}</h1>
+                    <h1 class='mainHeader'>{{ article.header }}</h1>
                     {% for art in article.childrens %}
                         <div class="listToggle">
                             <h4>{{ art.header }}</h4>
@@ -46,7 +46,7 @@
                 {% for art in article.childrens %}
                     <div id="tab{{ loop.index }}">
                         <div class="plainMeta">
-                            <h1 class="headerOrangeTab">{{ art.header }}</h1>
+                            <h1 class="headerTab">{{ art.header }}</h1>
                             {{ art.content | raw }}
                         </div>
                     </div><!-- end tab{{ loop.index }} -->\
