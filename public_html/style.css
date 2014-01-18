@@ -378,9 +378,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .boxWrapper .metaBox img
 {
 	width:100%;
-	height:100%;
+	height:70%;
 	position:absolute;
-	top:0px;
+	top:10%;
+	margin:auto;
 	
 }
 .boxWrapper .metaBox .top
@@ -419,16 +420,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	color:#CFC9C9;
 	font-weight:lighter;
 	font-size:16px;
-	padding:5px;
+	padding:2px 10px;
 	line-height:21px;
 	display:table-cell;
 	vertical-align: middle;
-	height:88px;
+	height:82px;
 }
 .boxWrapper .metaBox .bottom h6 span
 {
 	font-size:12px;
 	font-style: italic;
+	display:block;
+	float:right;
+	margin-right:20px;
 }
 
 /* ------------------------------------- styles for slideList------------------- */
