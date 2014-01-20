@@ -64,8 +64,13 @@
                         <li {% if active == "cms_articles" %}class="active"{% endif %}>
                             <a href="{{ path('cms_articles') }}">Wpisy</a>
                         </li>
+                        <li class="divider"></li>
                         <li {% if active == "cms_mails" %}class="active"{% endif %}>
                             <a href="{{ path('cms_mails') }}">Wiadomości</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li {% if active == "cms_files" %}class="active"{% endif %}>
+                            <a href="{{ path('cms_files') }}">Pliki</a>
                         </li>
                         {# <li><a href="#">Link 2</a></li>
                         <li class="divider"></li>

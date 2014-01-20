@@ -1,0 +1,46 @@
+{% extends "ChiaveCoreBundle::backendbase.html.twig" %}
+
+{% block title %}Zarządzanie plikami{% endblock %}
+{% block description %}lista plików{% endblock %}
+
+{% block active_name %}cms_files{% endblock %}
+
+{% block body -%}
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Nazwa</th>
+                <th>Typ</th>
+                <th>Widoczny<br />publicznie</th>
+                <th>Metadane</th>
+                <th>
+                    <a class="tiny button success" href="{{ path('cms_files_new') }}">
+                        Dodaj nowy plik
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for file in files %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ file.name }}</td>
+                <td>{{ file.typeText }}</td>
+                <td>{% if file.visible %}<strong>Tak</strong>{% else %}Nie{% endif %}</td>
+                <td>Oryginalna nazwa: {{ file.originalName }}<br/>
+                    Rozszerzenie: {# {{ file.mimeType }} #} ({{ file.extension }})<br/>
+                    Rozmiar: {{ file.size }}</td>
+                <td>
+                    <div class="button-bar">
+                        <ul class="button-group">
+                            <li><a class="tiny button" href="{{ path('cms_files_edit', { 'id': file.id }) }}">Edytuj</a></li>
+                            <li><a class="tiny button alert" href="{{ path('cms_files_delete', { 'id': file.id }) }}">Usuń</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

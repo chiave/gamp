@@ -1,0 +1,17 @@
+{% extends "ChiaveCoreBundle::backendbase.html.twig" %}
+
+{% block title %}Zarządzanie plikami{% endblock %}
+{% block description %}edycja pliku{% endblock %}
+
+{% block active_name %}cms_files{% endblock %}
+
+{% block body -%}
+
+    {{ form(edit_form) }}
+
+    <a class="small button" href="{{ path('cms_files') }}">
+        Powrót do listy plików
+    </a>
+    {{ form(delete_form) }}
+
+{% endblock %}
