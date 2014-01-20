@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Chiave\CMSBundle\Entity\Mails;
+
 class MailsType extends AbstractType
 {
     protected $type;
@@ -22,17 +24,21 @@ class MailsType extends AbstractType
     {
         $type = $this->type;
 
-        $builder
-            ->add('firstname')
-            ->add('lastname');
-
-        if ($type == "contact") {
-            $builder->add('email');
-        } elseif ($type == "raport") {
-            $builder->add('phone');
+        if ($type == "raport") {
+            $builder->add('type', 'choice', array(
+                'choices'   => Mails::getTypesArray(),
+            ));
         }
 
-        $builder->add('message')
+        // if ($type == "contact") {
+        // } elseif ($type == "raport") {
+        // }
+
+        $builder->add('firstname')
+            ->add('lastname')
+            ->add('email')
+            ->add('phone')
+            ->add('message')
             ->add('submit',
                 'submit',
                 array(

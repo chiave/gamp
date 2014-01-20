@@ -215,6 +215,28 @@ class PagesController extends Controller
     /**
      * Render main page boxes.
      *
+     * @Route("/renderMenu", name="cms_pages_menu")
+     * @Method("GET")
+     * @Template()
+     */
+    public function renderMenuAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $pages = $em->getRepository('ChiaveCMSBundle:Pages')
+            ->findBy(
+                array('inMenu' => true),
+                array('position' => 'ASC')
+        );
+
+        return array(
+            'pages' => $pages,
+        );
+    }
+
+    /**
+     * Render main page boxes.
+     *
      * @Route("/", name="cms_pages_main")
      * @Method("GET")
      * @Template()

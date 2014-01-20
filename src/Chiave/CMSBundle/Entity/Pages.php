@@ -70,6 +70,13 @@ class Pages
     /**
      * @var string
      *
+     * @ORM\Column(name="menuName", type="text", nullable=true)
+     */
+    private $menuName;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="slug", type="string", length=32, nullable=true, unique=true)
      */
     private $slug;
@@ -282,6 +289,29 @@ class Pages
     public function getInMenu()
     {
         return $this->inMenu;
+    }
+
+    /**
+     * Set menuName
+     *
+     * @param string $menuName
+     * @return Pages
+     */
+    public function setMenuName($menuName)
+    {
+        $this->menuName = $menuName;
+
+        return $this;
+    }
+
+    /**
+     * Get menuName
+     *
+     * @return string
+     */
+    public function getMenuName()
+    {
+        return $this->menuName;
     }
 
     /**

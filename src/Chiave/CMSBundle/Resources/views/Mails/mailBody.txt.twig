@@ -1,0 +1,19 @@
+Zgłoszenie numer: {{ mail.id }}
+Typ zgłoszenia:   {{ mail.typeText }}
+{% if mail.firstname or mail.lastname%}
+Nadawca:          {{ mail.firstname }} {{ mail.lastname }}
+{% endif %}
+{% if mail.email %}
+Adres email:      {{ mail.email }}
+{% endif %}
+{% if mail.phone %}
+Telefon:          {{ mail.phone }}
+{% endif %}
+{% if mail.createdAt %}
+Data:             {{ mail.createdAt|date('Y-m-d H:i:s') }}
+{% endif %}
+{% if mail.message %}
+Wiadomość:
+
+{{ mail.message | escape }}
+{% endif %}

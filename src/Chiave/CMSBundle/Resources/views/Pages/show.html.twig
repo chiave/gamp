@@ -1,7 +1,6 @@
 {% extends "ChiaveCoreBundle::frontendbase.html.twig" %}
 
 {% block body -%}
-        {#{dump(page)}#}
         {{ page.staticContent }}
         {% for article in page.articles %}
             {% if article.type == 0 and not article.getExpandable %}
@@ -90,42 +89,46 @@
                 </div>
             </div><!-- end tabWrapper -->
 
-            <script>
-                $('form').submit(function(e) {
-                    e.preventDefault();
-                    var form = $(this);
-                    var formId = $(this).parent().attr('id');
-                    var type;
-                    if (formId == 'contactForm') {
-                        type = 'contact';
-                    } else if (formId == 'raportForm') {
-                        type = 'raport';
-                    }
-
-                    var url = "{{ path('cms_mails_persist', {type:'__type__'}) }}";
-
-                    $.post(
-                        url.replace('__type__', type),
-                        $(this).serialize(),
-                        function(data) {
-                            console.log(data);
-                            $('.form-msg').remove();
-                            if (data.success) {
-                                $(form)[0].reset();
-                                $(form).before('<p class="form-msg form-success">Wiadomość została wysłana poprawnie.</p>');
-                            } else {
-                                $(form).before('<p class="form-msg form-error">Coś poszło nie tak. Spróbuj ponownie później.</p>');
-                            }
-                        }
-                    );
-
-                });
-            </script>
-
         {% elseif page.type == 2 %}
             <div class="boxWrapper">
                 {{ render(controller('ChiaveCMSBundle:Pages:renderMainPage')) }}
             </div><!--  end div boxWrapper -->
+
         {% endif %}
 {% endblock %}
 
+
+{% if page.type == 1 %}
+    {% block javascripts -%}
+        <script>
+            $('form').submit(function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var formId = $(this).parent().attr('id');
+                var type;
+                if (formId == 'contactForm') {
+                    type = 'contact';
+                } else if (formId == 'raportForm') {
+                    type = 'raport';
+                }
+
+                var url = "{{ path('cms_mails_persist', {type:'__type__'}) }}";
+                $.post(
+                    url.replace('__type__', type),
+                    $(this).serialize(),
+                    function(data) {
+                        console.log(data);
+                        $('.form-msg').remove();
+                        if (data.success) {
+                            $(form)[0].reset();
+                            $(form).before('<p class="form-msg form-success">Wiadomość została wysłana poprawnie.</p>');
+                        } else {
+                            $(form).before('<p class="form-msg form-error">Coś poszło nie tak. Spróbuj ponownie później.</p>');
+                        }
+                    }
+                );
+
+            });
+        </script>
+    {% endblock %}
+{% endif %}

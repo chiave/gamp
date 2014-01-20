@@ -4,6 +4,13 @@ namespace Chiave\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+// TODO: make some true constants!!
+const MAIL_TYPE_CONTACT  = 0;
+const MAIL_TYPE_TRAINING_QUESTION  = 1;
+const MAIL_TYPE_TRAINING_SIGN_UP  = 2;
+const MAIL_TYPE_OFFER  = 3;
+const MAIL_TYPE_BREAKAGE  = 4;
+
 /**
  * Mails
  *
@@ -21,6 +28,13 @@ class Mails
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer", nullable=true)
+     */
+    private $type = MAIL_TYPE_CONTACT;
 
     /**
      * @var string
@@ -72,6 +86,60 @@ class Mails
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     * @return Mails
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Get type as text
+     *
+     * @return string
+     */
+    public function getTypeText()
+    {
+        if ($this->type != MAIL_TYPE_CONTACT) {
+            $types = $this->getTypesArray();
+            return $types[$this->type];
+        } else {
+            return 'Kontakt';
+        }
+    }
+
+    /**
+     * Get all types
+     *
+     * @return array
+     */
+    public static function getTypesArray()
+    {
+        return array(
+            // MAIL_TYPE_CONTACT => 'kontakt',
+            MAIL_TYPE_TRAINING_QUESTION => 'Zapytanie o kurs/szkolenie',
+            MAIL_TYPE_TRAINING_SIGN_UP => 'Zgłoszenie na kurs/szkolenie',
+            MAIL_TYPE_OFFER => 'Zapytanie ofertowe',
+            MAIL_TYPE_BREAKAGE => 'Zgłoszenie usterki',
+        );
     }
 
     /**

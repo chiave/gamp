@@ -94,7 +94,6 @@ class MailsController extends Controller
      *
      * @Route("/mails/persistForm/{type}", name="cms_mails_persist")
      * @Method("POST")
-     * @Template("ChiaveCMSBundle:Mails:renderForms.html.twig")
      */
     public function persistAction(Request $request, $type = 'contact')
     {
@@ -117,9 +116,40 @@ class MailsController extends Controller
         $data = $form->getData();
 
         if ($form->isValid()) {
+
+            if ($type == 'contact') {
+                $mail->setType(0);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($mail);
             $em->flush();
+
+            $from = array(
+                    $mail->getEmail() => $mail->getFirstname() . ' ' . $mail->getLastname()
+                  );
+
+            //TODO: Selecting ToEmail by form type here.
+            //  switch($mail->getType()) {
+            //      case 0: $setTo = 'xxx'; break;
+            //      case 1: $setTo = 'yyy'; break;
+            //      case 2: $setTo = 'zzz'; break;
+            //      default: $setTo = 'gamp@gamp.edu.pl';
+            //  }
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('[Formularz] ' . $mail->getTypeText() . ' - zgłoszenie nr ' . $mail->getId())
+                ->setFrom($from)
+                ->setTo('gamp@gamp.edu.pl')
+                // ->setTo($setTo)
+                ->setBody(
+                    $this->renderView(
+                        'ChiaveCMSBundle:Mails:mailBody.txt.twig',
+                        array('mail'    => $mail)
+                    )
+                )
+            ;
+            $this->get('mailer')->send($message);
+
 
             $result->success = true;
             return new JsonResponse(

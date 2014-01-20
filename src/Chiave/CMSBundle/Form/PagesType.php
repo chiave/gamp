@@ -26,6 +26,7 @@ class PagesType extends AbstractType
             ->add('shortDescription')
             ->add('staticContent')
             ->add('inMenu')
+            ->add('menuName')
             ->add('slug')
             ->add('icon', 'entity', array(
                     'class' => 'ChiaveCMSBundle:Files',

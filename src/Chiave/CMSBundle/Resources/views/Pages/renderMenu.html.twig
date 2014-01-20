@@ -1,0 +1,7 @@
+<ul>
+    {% for page in pages %}
+        <li>
+            <a href="{{ app.request.getBaseURL() }}/{{ page.slug }}">{{ page.menuName | raw }}</a>
+        </li>
+    {% endfor %}
+</ul>
