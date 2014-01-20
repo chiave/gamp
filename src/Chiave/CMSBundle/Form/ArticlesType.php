@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Doctrine\ORM\EntityRepository;
+
 use Chiave\CMSBundle\Entity\Articles;
 
 class ArticlesType extends AbstractType
@@ -21,6 +23,17 @@ class ArticlesType extends AbstractType
             ->add('header')
             ->add('shortDescription')
             ->add('staticContent')
+            ->add('icon', 'entity', array(
+                    'class' => 'ChiaveCMSBundle:Files',
+                    'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('f')
+                            //->where('f.type IN (0, 5)') //5 == TYPE_ICON
+                            ->where('f.type = 5') //5 == TYPE_ICON
+                            ->orderBy('f.name', 'ASC');
+                    },
+                    'required' => false,
+                )
+            )
             ->add('type', 'choice', array(
                 'choices'   => Articles::getTypesArray()
                 )
@@ -34,7 +47,7 @@ class ArticlesType extends AbstractType
             ->add('important')
             ->add('page')
             // ->add('publicationDate')
-            // 
+            //
 //<input type="text" value="2012-05-15 21:05" class="fdatetimepicker" data-date-format="yyyy-mm-dd hh:ii">
             ->add('publicationDate', 'datetime', array(
                     'widget'    => 'single_text',
@@ -45,15 +58,15 @@ class ArticlesType extends AbstractType
                         )
                 )
             )
-            ->add('submit', 
-                'submit', 
+            ->add('submit',
+                'submit',
                 array(
                     'label' => 'Wyślij'
                 )
             )
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

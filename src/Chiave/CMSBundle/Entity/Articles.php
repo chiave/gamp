@@ -5,9 +5,9 @@ namespace Chiave\CMSBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 // TODO: make some true constants!!
-const TYPE_REGULAR  = 0;
-const TYPE_LIST     = 1;
-const TYPE_TAB      = 2;
+const ARTICLE_TYPE_REGULAR  = 0;
+const ARTICLE_TYPE_LIST     = 1;
+const ARTICLE_TYPE_TAB      = 2;
 
 /**
  * Articles
@@ -52,11 +52,17 @@ class Articles
     private $staticContent;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Files")
+     * @ORM\JoinColumn(name="icon_id", referencedColumnName="id", nullable=true)
+     */
+    private $icon;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="type", type="integer")
      */
-    private $type = TYPE_REGULAR;
+    private $type = ARTICLE_TYPE_REGULAR;
 
     /**
      * @var boolean
@@ -124,22 +130,21 @@ class Articles
      */
     private $root = false;
 
-    /**
-     * To string
-     */
+
+    public function __construct()
+    {
+        $this->childrens = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     public function __toString()
     {
         return $this->header;
     }
 
-    public function __construct() {
-        $this->childrens = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -162,7 +167,7 @@ class Articles
     /**
      * Get header
      *
-     * @return string 
+     * @return string
      */
     public function getHeader()
     {
@@ -208,11 +213,34 @@ class Articles
     /**
      * Get staticContent
      *
-     * @return string 
+     * @return string
      */
     public function getStaticContent()
     {
         return $this->staticContent;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param \Chiave\CMSBundle\Entity\Files $icon
+     * @return Articles
+     */
+    public function setIcon(\Chiave\CMSBundle\Entity\Files $icon = null)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return \Chiave\CMSBundle\Entity\Files
+     */
+    public function getIcon()
+    {
+        return $this->icon;
     }
 
     /**
@@ -231,7 +259,7 @@ class Articles
     /**
      * Get type
      *
-     * @return integer 
+     * @return integer
      */
     public function getType()
     {
@@ -246,9 +274,9 @@ class Articles
     public static function getTypesArray()
     {
         return array(
-            0 => 'wpis',
-            1 => 'lista',
-            2 => 'zakładka',
+            ARTICLE_TYPE_REGULAR => 'wpis',
+            ARTICLE_TYPE_LIST => 'lista',
+            ARTICLE_TYPE_TAB => 'zakładka',
         );
     }
 
@@ -291,7 +319,7 @@ class Articles
     /**
      * Get parent
      *
-     * @return \Chiave\CMSBundle\Entity\Articles 
+     * @return \Chiave\CMSBundle\Entity\Articles
      */
     public function getParent()
     {
@@ -324,7 +352,7 @@ class Articles
     /**
      * Get childrens
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildrens()
     {
@@ -347,7 +375,7 @@ class Articles
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -370,7 +398,7 @@ class Articles
     /**
      * Get important
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getImportant()
     {
@@ -393,7 +421,7 @@ class Articles
     /**
      * Get publicationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPublicationDate()
     {
@@ -416,7 +444,7 @@ class Articles
     /**
      * Get page
      *
-     * @return \Chiave\CMSBundle\Entity\Pages 
+     * @return \Chiave\CMSBundle\Entity\Pages
      */
     public function getPage()
     {
@@ -439,7 +467,7 @@ class Articles
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -471,7 +499,7 @@ class Articles
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -506,9 +534,19 @@ class Articles
     /**
      * Is root
      *
-     * @return boolean 
+     * @return boolean
      */
     public function isRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * Get root
+     *
+     * @return boolean
+     */
+    public function getRoot()
     {
         return $this->root;
     }

@@ -3,7 +3,8 @@
         {% for article in importantArticles %}
         <div class="item">
             <div class="logo">
-                <img alt="logo" src="{{ asset('images/news1.jpg') }}" />
+                <img alt="logo" src="{{ article.icon.webPath }}" />
+
             </div>
             <div class="meta">
                 <p>{{ article.shortDescription }}</p>

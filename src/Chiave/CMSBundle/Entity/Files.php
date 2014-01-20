@@ -8,12 +8,12 @@ use Symfony\Component\Validator\Constraints as Assert; //use annotation instead
 use Doctrine\ORM\Mapping as ORM;
 
 // TODO: make some true constants!!
-const TYPE_OTHERS       = 0;
-const TYPE_ACTS         = 1;
-const TYPE_TRAINING     = 2;
-const TYPE_MANAGEMENT   = 3;
-const TYPE_GALLERY      = 4;
-const TYPE_ICON         = 5;
+const FILE_TYPE_OTHERS       = 0;
+const FILE_TYPE_ACTS         = 1;
+const FILE_TYPE_TRAINING     = 2;
+const FILE_TYPE_MANAGEMENT   = 3;
+const FILE_TYPE_GALLERY      = 4;
+const FILE_TYPE_ICON         = 5;
 
 /**
  * Files
@@ -45,7 +45,7 @@ class Files
      *
      * @ORM\Column(name="type", type="integer")
      */
-    private $type = TYPE_OTHERS;
+    private $type = FILE_TYPE_OTHERS;
 
     /**
      * @var boolean
@@ -109,6 +109,12 @@ class Files
     private $updatedAt;
 
     private $temp;
+
+
+    public function __toString()
+    {
+        return $this->name . ' (.' . $this->getExtension() . ')';
+    }
 
     /**
      * Get id
@@ -185,12 +191,12 @@ class Files
     public static function getTypesArray()
     {
         return array(
-            0 => 'Inne',
-            1 => 'Akty prawne',
-            2 => 'Szkolenia',
-            3 => 'Zarządzanie',
-            4 => 'Galeria',
-            5 => 'Ikona',
+            FILE_TYPE_OTHERS => 'Inne',
+            FILE_TYPE_ACTS => 'Akty prawne',
+            FILE_TYPE_TRAINING => 'Szkolenia',
+            FILE_TYPE_MANAGEMENT => 'Zarządzanie',
+            FILE_TYPE_GALLERY => 'Galeria',
+            FILE_TYPE_ICON => 'Ikona',
         );
     }
 
@@ -228,7 +234,7 @@ class Files
     {
         return null === $this->path
             ? null
-            : $this->getUploadDir().'/'.$this->path;
+            : '../../'.$this->getUploadDir().'/'.$this->path;
     }
 
     protected function getUploadRootDir()
@@ -242,7 +248,7 @@ class Files
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/';
+        return 'uploads';
     }
 
     /**

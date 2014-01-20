@@ -4,6 +4,11 @@ namespace Chiave\CMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+// TODO: make some true constants!!
+const PAGE_TYPE_REGULAR  = 0;
+const PAGE_TYPE_CONTACT  = 1;
+const PAGE_TYPE_MAIN     = 2;
+
 /**
  * Pages
  *
@@ -28,6 +33,13 @@ class Pages
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type = PAGE_TYPE_REGULAR;
 
     /**
      * @var string
@@ -58,16 +70,15 @@ class Pages
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=32)
+     * @ORM\Column(name="slug", type="string", length=32, nullable=true, unique=true)
      */
     private $slug;
 
-    // *
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="image", type="string", length=32)
-
-    // private $image;
+    /**
+     * @ORM\ManyToOne(targetEntity="Files")
+     * @ORM\JoinColumn(name="icon_id", referencedColumnName="id", nullable=true)
+     */
+    private $icon;
 
     /**
      * @var integer
@@ -75,13 +86,6 @@ class Pages
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="contactForm", type="boolean", nullable=true)
-     */
-    private $contactForm;
 
     /**
      * @var \DateTime
@@ -98,17 +102,11 @@ class Pages
     private $updatedAt;
 
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * To string
-     */
     public function __toString()
     {
         return $this->title;
@@ -145,6 +143,43 @@ class Pages
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     * @return Pages
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Get all types
+     *
+     * @return array
+     */
+    public static function getTypesArray()
+    {
+        return array(
+            PAGE_TYPE_REGULAR => 'zwykła',
+            PAGE_TYPE_CONTACT => 'kontaktowa',
+            PAGE_TYPE_MAIN => 'główna',
+        );
     }
 
     /**
@@ -273,6 +308,29 @@ class Pages
     }
 
     /**
+     * Set icon
+     *
+     * @param \Chiave\CMSBundle\Entity\Files $icon
+     * @return Pages
+     */
+    public function setIcon(\Chiave\CMSBundle\Entity\Files $icon = null)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return \Chiave\CMSBundle\Entity\Files
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
      * Set position
      *
      * @param integer $position
@@ -293,29 +351,6 @@ class Pages
     public function getPosition()
     {
         return $this->position;
-    }
-
-    /**
-     * Set contactForm
-     *
-     * @param boolean $contactForm
-     * @return Pages
-     */
-    public function setContactForm($contactForm)
-    {
-        $this->contactForm = $contactForm;
-
-        return $this;
-    }
-
-    /**
-     * Get contactForm
-     *
-     * @return boolean
-     */
-    public function getContactForm()
-    {
-        return $this->contactForm;
     }
 
     /**

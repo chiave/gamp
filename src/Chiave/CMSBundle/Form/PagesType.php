@@ -6,6 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Doctrine\ORM\EntityRepository;
+
+use Chiave\CMSBundle\Entity\Pages;
+
 class PagesType extends AbstractType
 {
         /**
@@ -16,13 +20,23 @@ class PagesType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('type', 'choice', array(
+                'choices'   => Pages::getTypesArray()
+                ))
             ->add('shortDescription')
             ->add('staticContent')
             ->add('inMenu')
             ->add('slug')
-            // ->add('image')
+            ->add('icon', 'entity', array(
+                    'class' => 'ChiaveCMSBundle:Files',
+                    'query_builder' => function(EntityRepository $er) {
+                        return $er->createQueryBuilder('f')
+                            ->where('f.type = 5') //5 == TYPE_ICON
+                            ->orderBy('f.name', 'ASC');
+                    },
+                )
+            )
             ->add('position')
-            ->add('contactForm')
             ->add('submit',
                 'submit',
                 array(

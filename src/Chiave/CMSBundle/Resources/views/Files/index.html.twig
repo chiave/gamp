@@ -29,7 +29,7 @@
                 <td>{{ file.typeText }}</td>
                 <td>{% if file.visible %}<strong>Tak</strong>{% else %}Nie{% endif %}</td>
                 <td>Oryginalna nazwa: {{ file.originalName }}<br/>
-                    Rozszerzenie: {# {{ file.mimeType }} #} ({{ file.extension }})<br/>
+                    Rozszerzenie: {# {{ file.mimeType }} #} .{{ file.extension }}<br/>
                     Rozmiar: {{ file.size }}</td>
                 <td>
                     <div class="button-bar">

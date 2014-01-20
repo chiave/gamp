@@ -97,15 +97,15 @@ class PagesController extends Controller
     /**
      * Finds and displays page.
      *
-     * @Route("/show/{id}", name="cms_pages_show")
+     * @Route("/{slug}", name="cms_pages_show", defaults={"slug" = ""})
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $page = $em->getRepository('ChiaveCMSBundle:Pages')->find($id);
+        $page = $em->getRepository('ChiaveCMSBundle:Pages')->findOneBySlug($slug);
 
         if (!$page) {
             throw $this->createNotFoundException('Unable to find Page entity.');
@@ -210,6 +210,25 @@ class PagesController extends Controller
         }
 
         return $this->redirect($this->generateUrl('cms_pages'));
+    }
+
+    /**
+     * Render main page boxes.
+     *
+     * @Route("/", name="cms_pages_main")
+     * @Method("GET")
+     * @Template()
+     */
+    public function renderMainPageAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $pages = $em->getRepository('ChiaveCMSBundle:Pages')
+            ->findBy(array(), array('position' => 'ASC'));
+
+        return array(
+            'pages' => $pages,
+        );
     }
 
     /**

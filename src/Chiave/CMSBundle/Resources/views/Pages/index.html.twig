@@ -34,7 +34,7 @@
                 <td>
                     <div class="button-bar">
                         <ul class="button-group">
-                            <li><a class="tiny button" href="{{ path('cms_pages_show', { 'id': page.id }) }}">Pokaż</a></li>
+                            <li><a class="tiny button" href="{{ path('cms_pages_show', { 'slug': page.slug }) }}">Pokaż</a></li>
                             <li><a class="tiny button" href="{{ path('cms_pages_edit', { 'id': page.id }) }}">Edytuj</a></li>
                             <li><a class="tiny button alert" href="{{ path('cms_pages_delete', { 'id': page.id }) }}">Usuń</a></li>
                         </ul>
