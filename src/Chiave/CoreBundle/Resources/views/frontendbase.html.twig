@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>GAMP - {% block title %}nieruchomości{% endblock %}</title>
         <!--title>{% block description %}Strona główna{% endblock %}</title-->
+        <link rel="stylesheet" href="{{ asset('bundles/chiavecore/css/foundation.min.css') }}" />
         {% block stylesheets %}{% endblock %}
 
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
@@ -15,6 +16,8 @@
             // });
         </script>
 
+        <script src="{{ asset('bundles/chiavecore/js/modernizr.js') }}"></script>
+        <script src="{{ asset('bundles/chiavecore/js/vendor/fastclick.js') }}"></script>
     </head>
     <body>
         <div id="page">
@@ -44,8 +47,11 @@
         </div><!-- end div page -->
 
         {% block javascripts %}{% endblock %}
+        <script src="{{ asset('bundles/chiavecore/js/foundation.min.js') }}"></script>
+        <script src="{{ asset('bundles/chiavecore/js/foundation/foundation.clearing.js') }}"></script>
         <script type="text/javascript">
 
+            $(document).foundation();
             $(document).ready(function(){
                 $("#plainBoxToggle").click(function(){
                     $('#plainBoxTarget').slideDown();

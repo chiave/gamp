@@ -254,7 +254,7 @@ class PagesController extends Controller
     }
 
     /**
-     * Render main page boxes.
+     * Render download page.
      *
      * @Route("/", name="cms_pages_download")
      * @Method("GET")
@@ -280,6 +280,30 @@ class PagesController extends Controller
 
         return array(
             'categories' => $categories,
+        );
+    }
+
+    /**
+     * Render gallery page.
+     *
+     * @Route("/", name="cms_pages_gallery")
+     * @Method("GET")
+     * @Template()
+     */
+    public function renderGalleryPageAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $images = $em->getRepository('ChiaveCMSBundle:Files')
+            ->findBy(
+                array(
+                   'type' => 4,
+                   'visible' => true
+                )
+             );
+
+        return array(
+            'images' => $images,
         );
     }
 

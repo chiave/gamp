@@ -97,9 +97,11 @@
         {% elseif page.type == 3 %}
             <div class="plainMeta borderBottomGrey">
                 {{ render(controller('ChiaveCMSBundle:Pages:renderDownloadPage')) }}
-
             </div>
         {% elseif page.type == 4 %}
+            <div class="plainMeta borderBottomGrey">
+                {{ render(controller('ChiaveCMSBundle:Pages:renderGalleryPage')) }}
+            </div>
         {% endif %}
 {% endblock %}
 

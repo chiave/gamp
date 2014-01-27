@@ -1,0 +1,11 @@
+<h1 class="mainHeader">NASZA GALERIA</h1>
+<div class="galleryCategory">
+    <h1>Nasze budynki</h1>
+    <div class="galleryImages">
+        <ul class="clearing-thumbs" data-clearing>
+            {% for image in images %}
+            <li><a href="{{ image.webPath }}" ><img src="{{ image.webPath }}" /></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
