@@ -7,7 +7,7 @@ body, html
 }
 body
 {
-	  background-image: url(../images/background_image.jpg);
+	  background-image: url(images/background_image.jpg);
 	 background-repeat: no-repeat;
 	 background-size:100% 100%;
 	 background-attachment: fixed;
@@ -33,7 +33,7 @@ body
 	min-height:100%;
 	position:relative;
 	color: #464646;
-	background:url(../images/page_bg.png);
+	background:url(images/page_bg.png);
 }
 #header
 {
@@ -52,8 +52,32 @@ body
 	bottom:0px;
 	height:60px;
 	width:100%;
-	background: url(../images/bg-nav.jpg) 0 0 repeat-x;
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	border-top: 1px solid #D1D1D1;
+}
+#cookies
+{
+	width:900px;
+	height:30px;
+	margin:0px auto;
+	background: url(images/news_bg.png);
+	border-radius:4px;
+	padding:30px;
+	top:0px;
+	position: relative;
+}
+#cookies img
+{
+	width:30px;
+	height:30px;
+	position:absolute;
+	right: 10px;
+	top:10px;
+	background: white;
+}
+#cookies img:HOVER
+{
+	cursor: pointer;
 }
 /*--------------------------------------------------------------------------*/
 
@@ -160,7 +184,7 @@ body
 	width:144px;
 	margin-right:2px;
 	text-align:center;
-	background: url(../images/bg-nav.jpg) 0 0 repeat-x;
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	border-right: solid 1px #686868 ;
 	-webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
@@ -237,7 +261,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	height:60px;
 	width:60px;
 	float:left;
-	/*background:url(../images/news_bg.png);*/
+	/*background:url(images/news_bg.png);*/
 	padding:3px;
 }
 .infoBox .item .logo img
@@ -333,7 +357,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	color: #AC5896;
 	padding:15px 0px;
 	font-size:18px;
-    background: url(../images/bg-nav.jpg) 0 0 repeat-x;
+    background: url(images/bg-nav.jpg) 0 0 repeat-x;
     font-weight:lighter;
     margin-bottom:30px;
     border-radius:3px;
@@ -388,7 +412,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	width:100%;
 	height:57px;
-	background: url(../images/bg-nav.jpg) 0 0 repeat-x;
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	position:absolute;
 	top:0;
 	}
@@ -410,7 +434,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	width:100%;
 	height:88px;
-	background: url(../images/bg-nav.jpg) 0 0 repeat-x;
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	position:absolute;
 	bottom:0px;
 	overflow:hidden;
@@ -445,7 +469,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	margin-top:3px;
 	border-radius:5px;
-	background: url(../images/bg-nav.jpg) 0 0 repeat-x;
+	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	border: 1px solid #D1D1D1;
 	-webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 1);
@@ -485,11 +509,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	border-left: 1px solid #D1D1D1;
 	border-right: 1px solid #D1D1D1;
 	display:none;
-	background: url(../images/plainMeta_bg.png);
+	background: url(images/plainMeta_bg.png);
 }
 .slideList .more p
 {
-	background: url(../images/dot.png);
+	background: url(images/dot.png);
 	background-position: top-left;
 	background-repeat: no-repeat;
 	padding:0px 10px 10px 25px;
@@ -533,7 +557,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	padding:0px 20px 20px 20px;
 	margin-bottom:10px;
-	background:url(../images/plainMeta_bg.png);
+	background:url(images/plainMeta_bg.png);
 	border-radius:5px;
 }
 
@@ -611,7 +635,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	padding:25px 15px;
 	overflow:hidden;
-	background: url(../images/plainMeta_bg.png);
+	background: url(images/plainMeta_bg.png);
 	border-radius:5px;
 }
 .tabWrapper ul
@@ -645,7 +669,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 }
 .tabWrapper .plainMeta p
  {
-	background: url(../images/dot.png);
+	background: url(images/dot.png);
 	background-position: top-left;
 	background-repeat: no-repeat;
 	padding: 0px 10px 10px 25px;
@@ -765,9 +789,81 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 ul.dottedList
 {
-	list-style-image:url(../images/dot.png);
+	list-style-image:url(images/dot.png);
 	margin-left:30px;
 	line-height:30px;
 }
 
-
+/* --------------------------------------- styles for files download----------------------------- */
+.fileCategory
+{
+	margin-top:25px;
+	border: 1px solid #D1D1D1;
+	padding: 25px;
+	overflow: hidden;
+}
+.fileCategory h1
+{
+	font-size: 16px;
+color: #464646;
+padding: 7px 10px 10px 0px;
+line-height: 21px;
+}
+.fileCategory .fileItem
+{
+	border:1px solid rgb(238, 200, 248);
+	border-radius:5px;
+	width:250px;
+	height:92px;
+	padding:5px;
+	overflow:hidden;
+	float: left;
+	margin:0px 15px 15px 0px;
+	position: relative;
+}
+.fileCategory .fileItem img
+{
+	width:40px;
+	height:40px;
+	padding:5px;
+	float:left;
+	display: block;
+	
+}
+.fileCategory .fileItem h1
+{
+	font-size: 13px;
+	color:grey;
+	padding:0px 5px 5px 0px;
+}
+.fileCategory .fileItem p
+{
+	font-size:10px;
+	padding:0px;
+	line-height:14px;
+}
+.fileCategory .fileItem h2
+{
+	line-height:14px;
+	font-size:10px;
+	color:grey;
+	position: absolute;
+	left:5px;
+	bottom:5px;
+	
+	
+}
+.fileCategory .fileItem input
+{
+	position:absolute;
+	bottom:5px;
+	right:5px;
+	display: block;
+	width:70px;
+	background: #AC5896;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	cursor: pointer;
+	font-size:12px;
+}
