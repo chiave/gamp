@@ -42,12 +42,43 @@
             });
     });
 
-    //hide page if parent is choosen
-    //hide parent if page is choosen
-    //hide parent if type == 0 is choosen
-    //
+    function checkFields() {
+        if ($('#{{ edit_form.important.vars.id }}').is(':checked')) {
+            $('#{{ edit_form.shortDescription.vars.id }}').parent().slideDown();
+            $('#{{ edit_form.icon.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ edit_form.shortDescription.vars.id }}').parent().slideUp();
+            $('#{{ edit_form.icon.vars.id }}').parent().slideUp();
+        }
 
-    $('#{{edit_form.type.vars.id}}').change();
+        if ($('#{{ edit_form.type.vars.id }}').val() == 0) { //wpis
+            $('#{{ edit_form.expandable.vars.id }}').parent().slideDown();
+            $('#{{ edit_form.page.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ edit_form.expandable.vars.id }}').parent().slideUp();
+            $('#{{ edit_form.page.vars.id }}').parent().slideUp();
+        }
+
+        if ($('#{{ edit_form.type.vars.id }}').val() == 1 || $('#{{ edit_form.type.vars.id }}').val() == 2) { //lista
+            $('#{{ edit_form.parent.vars.id }}').parent().slideDown();
+            $('#{{ edit_form.page.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ edit_form.parent.vars.id }}').parent().slideUp();
+            $('#{{ edit_form.page.vars.id }}').parent().slideUp();
+        }
+
+        if ($('#{{ edit_form.parent.vars.id }}').val() != 0 || $('#{{ edit_form.type.vars.id }}').val() == 0) {
+            $('#{{ edit_form.content.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ edit_form.content.vars.id }}').parent().slideUp();
+        }
+    }
+
+    $('#{{ edit_form.important.vars.id }}, #{{ edit_form.type.vars.id }}, #{{ edit_form.parent.vars.id }}').change(function(){
+        checkFields();
+    });
+
+    checkFields();
 
 </script>
 

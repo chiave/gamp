@@ -14,3 +14,23 @@
     </a>
 
 {% endblock %}
+
+{% block javascripts -%}
+    <script>
+        function checkFields(element = $('#{{ form.inMenu.vars.id }}')) {
+            if ($(element).is(':checked')) {
+                $('#{{ form.menuName.vars.id }}').parent().slideDown();
+                $('#{{ form.position.vars.id }}').parent().slideDown();
+            } else {
+                $('#{{ form.menuName.vars.id }}').parent().slideUp();
+                $('#{{ form.position.vars.id }}').parent().slideUp();
+            }
+        }
+
+        $('#{{ form.inMenu.vars.id }}').change(function(){
+            checkFields($(this));
+        });
+
+        checkFields();
+    </script>
+{% endblock %}

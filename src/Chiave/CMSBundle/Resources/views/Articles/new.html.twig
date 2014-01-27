@@ -42,6 +42,49 @@
     });
 
     $('#{{form.type.vars.id}}').change();
+
+    function checkFields() {
+        if ($('#{{ form.important.vars.id }}').is(':checked')) {
+            $('#{{ form.shortDescription.vars.id }}').parent().slideDown();
+            $('#{{ form.icon.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ form.shortDescription.vars.id }}').parent().slideUp();
+            $('#{{ form.icon.vars.id }}').parent().slideUp();
+        }
+
+        if ($('#{{ form.type.vars.id }}').val() == 0) { //wpis
+            $('#{{ form.expandable.vars.id }}').parent().slideDown();
+            $('#{{ form.page.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ form.expandable.vars.id }}').parent().slideUp();
+            $('#{{ form.page.vars.id }}').parent().slideUp();
+        }
+
+        if ($('#{{ form.type.vars.id }}').val() == 1 || $('#{{ form.type.vars.id }}').val() == 2) {
+            $('#{{ form.parent.vars.id }}').parent().slideDown();
+            $('#{{ form.page.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ form.parent.vars.id }}').parent().slideUp();
+            $('#{{ form.page.vars.id }}').parent().slideUp();
+        }
+
+        if ($('#{{ form.parent.vars.id }}').val() != 0 || $('#{{ form.type.vars.id }}').val() == 0) {
+            $('#{{ form.content.vars.id }}').parent().slideDown();
+        } else {
+            $('#{{ form.content.vars.id }}').parent().slideUp();
+        }
+
+    }
+
+    $('#{{ form.important.vars.id }}, #{{ form.type.vars.id }}, #{{ form.parent.vars.id }}').change(function(){
+        checkFields();
+    });
+
+    checkFields();
+
+
+
+
 </script>
 
 {% endblock %}

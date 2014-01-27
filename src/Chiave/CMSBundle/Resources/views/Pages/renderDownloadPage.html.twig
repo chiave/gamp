@@ -1,0 +1,15 @@
+<h1 class="mainHeader">PLIKI DO POBRANIA</h1>
+{% for catName, files in categories %}
+<div class="fileCategory">
+    <h1>{{ catName }}</h1>
+    {% for file in files %}
+    <div class="fileItem">
+        <img src="/images/{{ file.extension }}.png" />
+        <h1>{{ file.name }}</h1>
+        <p>{{ file.description }}</p>
+        <h2>Rozmiar: {{ file.sizeText }}</h2>
+        <input type="button" value="Pobierz" />
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}

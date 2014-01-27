@@ -25,9 +25,10 @@ class PagesType extends AbstractType
                 ))
             ->add('shortDescription')
             ->add('staticContent')
+            ->add('slug')
             ->add('inMenu')
             ->add('menuName')
-            ->add('slug')
+            ->add('position')
             ->add('icon', 'entity', array(
                     'class' => 'ChiaveCMSBundle:Files',
                     'query_builder' => function(EntityRepository $er) {
@@ -37,7 +38,6 @@ class PagesType extends AbstractType
                     },
                 )
             )
-            ->add('position')
             ->add('submit',
                 'submit',
                 array(

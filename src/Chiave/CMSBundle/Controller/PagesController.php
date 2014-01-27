@@ -254,6 +254,36 @@ class PagesController extends Controller
     }
 
     /**
+     * Render main page boxes.
+     *
+     * @Route("/", name="cms_pages_download")
+     * @Method("GET")
+     * @Template()
+     */
+    public function renderDownloadPageAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $categories = array();
+
+        $files = $em->getRepository('ChiaveCMSBundle:Files')
+            ->findBy(
+                array(
+                   'type' => array(1, 2, 3),
+                   'visible' => true
+                )
+             );
+
+        foreach ($files as $file) {
+            $categories[$file->getTypeText()][] = $file;
+        }
+
+        return array(
+            'categories' => $categories,
+        );
+    }
+
+    /**
     * Creates a form for page.
     *
     * @param Pages $page

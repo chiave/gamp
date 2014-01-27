@@ -94,6 +94,12 @@
                 {{ render(controller('ChiaveCMSBundle:Pages:renderMainPage')) }}
             </div><!--  end div boxWrapper -->
 
+        {% elseif page.type == 3 %}
+            <div class="plainMeta borderBottomGrey">
+                {{ render(controller('ChiaveCMSBundle:Pages:renderDownloadPage')) }}
+
+            </div>
+        {% elseif page.type == 4 %}
         {% endif %}
 {% endblock %}
 

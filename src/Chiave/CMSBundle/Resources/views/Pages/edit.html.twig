@@ -15,3 +15,23 @@
     {{ form(delete_form) }}
 
 {% endblock %}
+
+{% block javascripts -%}
+    <script>
+        function checkFields(element = $('#{{ edit_form.inMenu.vars.id }}')) {
+            if ($(element).is(':checked')) {
+                $('#{{ edit_form.menuName.vars.id }}').parent().slideDown();
+                $('#{{ edit_form.position.vars.id }}').parent().slideDown();
+            } else {
+                $('#{{ edit_form.menuName.vars.id }}').parent().slideUp();
+                $('#{{ edit_form.position.vars.id }}').parent().slideUp();
+            }
+        }
+
+        $('#{{ edit_form.inMenu.vars.id }}').change(function(){
+            checkFields($(this));
+        });
+
+        checkFields();
+    </script>
+{% endblock %}

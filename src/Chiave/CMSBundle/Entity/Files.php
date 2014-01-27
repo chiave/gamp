@@ -241,7 +241,7 @@ class Files
     {
         return null === $this->path
             ? null
-            : '../../'.$this->getUploadDir().'/'.$this->path;
+            : '../'.$this->getUploadDir().'/'.$this->path;
     }
 
     protected function getUploadRootDir()
@@ -435,6 +435,31 @@ class Files
     }
 
     /**
+     * Get size as text
+     *
+     * @return string
+     */
+    public function getSizeText($precision = 2)
+    {
+        $bytes = $this->size;
+        $kilobyte = 1024;
+        $megabyte = $kilobyte * 1024;
+
+        if (($bytes >= 0) && ($bytes < $kilobyte)) {
+            return $bytes . ' B';
+
+        } elseif (($bytes >= $kilobyte) && ($bytes < $megabyte)) {
+            return round($bytes / $kilobyte, $precision) . ' KB';
+
+        } elseif (($bytes >= $megabyte) && ($bytes < $gigabyte)) {
+            return round($bytes / $megabyte, $precision) . ' MB';
+
+        } else {
+            return $bytes . ' B';
+        }
+    }
+
+    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -513,7 +538,7 @@ class Files
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -536,7 +561,7 @@ class Files
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {

@@ -21,8 +21,15 @@ class ArticlesType extends AbstractType
         $now = new \DateTime('now');
         $builder
             ->add('header')
-            ->add('shortDescription')
             ->add('staticContent')
+            ->add('type', 'choice', array(
+                'choices'   => Articles::getTypesArray()
+                )
+            )
+            ->add('expandable')
+
+            ->add('important')
+            ->add('shortDescription')
             ->add('icon', 'entity', array(
                     'class' => 'ChiaveCMSBundle:Files',
                     'query_builder' => function(EntityRepository $er) {
@@ -34,17 +41,12 @@ class ArticlesType extends AbstractType
                     'required' => false,
                 )
             )
-            ->add('type', 'choice', array(
-                'choices'   => Articles::getTypesArray()
-                )
-            )
-            ->add('expandable')
+
             ->add('parent', null, array(
                 'required' => false,
                 )
             )
             ->add('content')
-            ->add('important')
             ->add('page')
             // ->add('publicationDate')
             //
