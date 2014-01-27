@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	
-	<meta name="robots" content="index, follow" />
 	<meta name="copyright" content="2014 CHIAVE" />
 	<meta name="Author" content="CHIAVE" />
 	<meta name="revisit-after" content="7 days" />
@@ -11,16 +10,19 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	
+	<script src="jquery/jquery-1.9.1.js"></script>
+	<script src="jquery/vendor/modernizr.js"></script>
 	
+  
 	
 	<title>GAMP-galeria</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="stylesheet" type="text/css" href="reset.css" />
-	<script src="jquery/jquery-1.9.1.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-<title>GAMP-HOME</title>
+	 <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/foundation.css">
 </head>
 <body>
+
 <div id="page">
 	
 
@@ -52,20 +54,13 @@
 			<div class="galleryCategory">
 				<h1>Galeria nazwa</h1>
 				<div class="galleryImages">
-					<img src="images/house.jpg" />
-					<img src="images/item3.jpg" />
-					<img src="images/metabox3.jpg" />
-					<img src="images/item1.jpg" />
-					<img src="images/metabox3.jpg" />
-					<img src="images/item1.jpg" />
-					<img src="images/metabox4.jpg" />
-					<img src="images/house.jpg" />
-					<img src="images/item3.jpg" />
-					<img src="images/metabox3.jpg" />
-					<img src="images/item1.jpg" />
-					<img src="images/metabox3.jpg" />
-					<img src="images/item1.jpg" />
-					<img src="images/metabox4.jpg" />
+				<ul class="clearing-thumbs" data-clearing>
+					<li><a href="images/house.jpg" ><img src="images/house.jpg" /></a></li>
+					<li><a href="images/item3.jpg" ><img src="images/item3.jpg" /></a></li>
+					<li><a href="images/metabox3.jpg" ><img src="images/metabox3.jpg" /></a></li>
+					<li><a href="images/item1.jpg" ><img src="images/item1.jpg" /></a></li>
+</ul>	
+				
 				</div>
 			</div>
 			
@@ -73,5 +68,14 @@
 	</div><!-- end column s7 -->
 	</div> <!-- end fullWrapperPad -->
 </div><!-- end content -->
+
+<script src="jquery/vendor/jquery.js"></script>
+
+  <script src="jquery/foundation/foundation.js"></script>
+  <script src="jquery/foundation/foundation.clearing.js"></script>
+<script>
+    $(document).foundation();
+  </script>
+
 </body>
 </html>
