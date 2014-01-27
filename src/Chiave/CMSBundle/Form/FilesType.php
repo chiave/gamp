@@ -23,6 +23,7 @@ class FilesType extends AbstractType
                 'choices'   => Files::getTypesArray()
                 )
             )
+            ->add('description')
             ->add('visible')
             ->add('file')
             ->add('submit',

@@ -48,6 +48,13 @@ class Files
     private $type = FILE_TYPE_OTHERS;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="visible", type="boolean", nullable=true)
@@ -488,5 +495,51 @@ class Files
     public function setUpdatedTimestamps()
     {
         $this->updatedAt = new \DateTime('now');
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Files
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Files
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

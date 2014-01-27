@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 const PAGE_TYPE_REGULAR  = 0;
 const PAGE_TYPE_CONTACT  = 1;
 const PAGE_TYPE_MAIN     = 2;
+const PAGE_TYPE_FILES    = 3;
+const PAGE_TYPE_GALLERY  = 4;
 
 /**
  * Pages
@@ -183,9 +185,11 @@ class Pages
     public static function getTypesArray()
     {
         return array(
-            PAGE_TYPE_REGULAR => 'zwykła',
-            PAGE_TYPE_CONTACT => 'kontaktowa',
-            PAGE_TYPE_MAIN => 'główna',
+            PAGE_TYPE_REGULAR   => 'zwykła',
+            PAGE_TYPE_CONTACT   => 'kontaktowa',
+            PAGE_TYPE_MAIN      => 'główna',
+            PAGE_TYPE_FILES     => 'pliki',
+            PAGE_TYPE_GALLERY   => 'galeria',
         );
     }
 
