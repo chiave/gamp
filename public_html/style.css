@@ -55,6 +55,30 @@ body
 	background: url(images/bg-nav.jpg) 0 0 repeat-x;
 	border-top: 1px solid #D1D1D1;
 }
+#cookies
+{
+	width:900px;
+	height:30px;
+	margin:0px auto;
+	background: url(images/news_bg.png);
+	border-radius:4px;
+	padding:30px;
+	top:0px;
+	position: relative;
+}
+#cookies img
+{
+	width:30px;
+	height:30px;
+	position:absolute;
+	right: 10px;
+	top:10px;
+	background: white;
+}
+#cookies img:HOVER
+{
+	cursor: pointer;
+}
 /*--------------------------------------------------------------------------*/
 
 

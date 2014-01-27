@@ -17,13 +17,19 @@
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<link rel="stylesheet" type="text/css" href="reset.css" />
 	<script src="jquery/jquery-1.9.1.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 <title>GAMP-HOME</title>
 </head>
 <body>
 
 <div id="page">
+	
 
 	<div id="header">
+	<div id="cookies">
+			 <img id="cookiesClose" src="images/cross.png" alt ="zamknij" />
+	</div>
+	
 		<div class="fullWrapper">
 		
 			<div class="topMenu">
@@ -187,7 +193,14 @@ Doradztwo na rynku nieruchomości, obsługa prawna i finansowo-księgowa. </h6>
 
 </div><!-- end div page -->
 
-<!-- testing string -->
+
+<script>
+$(document).ready(function(){
+	$('#cookiesClose').click(function(){
+		$('#cookies').slideUp();
+	});
+});
+</script>
 
 </body>
 </html>
