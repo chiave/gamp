@@ -12,11 +12,11 @@
         <thead>
             <tr>
                 <th>Lp.</th>
+                <th>Typ.</th>
                 <th>Nadawca</th>
                 <th>E-mail</th>
                 <th>Telefon</th>
                 <th>Z dnia</th>
-                <th>Wiadomość</th>
                 <th></th>
             </tr>
         </thead>
@@ -24,11 +24,11 @@
         {% for mail in mails %}
             <tr>
                 <td>{{ loop.index }}</td>
+                <td>{{ mail.typeText }}</td>
                 <td>{{ mail.firstname }} {{ mail.lastname }}</td>
                 <td>{{ mail.email }}</td>
                 <td>{{ mail.phone }}</td>
                 <td>{{ mail.createdAt|date('Y-m-d H:i:s') }}</td>
-                <td>{{ mail.message }}</td>
                 <td>
                     <div class="button-bar">
                         <ul class="button-group">

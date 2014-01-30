@@ -12,12 +12,10 @@
         <thead>
             <tr>
                 <th>Lp.</th>
-                <th>Tytuł</th>
                 <th>Strona</th>
-                <th>#Artykuły#</th>
+                <th>Tytuł</th>
+                <th>Typ</th>
                 <th>Publikacja</th>
-                {# <th>Utworzony</th> #}
-                <th>Edytowany</th>
                 <th>Ważny</th>
                 <th>
                     <a class="tiny button success" href="{{ path('cms_articles_new') }}">
@@ -30,17 +28,11 @@
         {% for article in articles %}
             <tr>
                 <td>{{ loop.index }}</a></td>
-                <td>{{ article.header }}</td>
                 <td>{{ article.page }}</td>
-                <td>
-                {% for art in article.childrens %}
-                    {{ art.id }};<br />
-                {% endfor %}
-                </td>
-                <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d H:i:s') }}{% else %}-----{% endif %}</td>
-                {# <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
-                <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if article.important == true %}tak{% else %}nie {% endif %}</td>
+                <td>{{ article.header }}</td>
+                <td>{{ article.typeText }}</td>
+                <td>{% if article.publicationDate %}{{ article.publicationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if article.important == true %}tak{% else %}{% endif %}</td>
                 <td>
                     <div class="button-bar">
                         <ul class="button-group">
@@ -68,7 +60,7 @@
                 if (data.success) {
                     $(this).closest('tr').remove();
                     // $(this).parent().parent().parent().parent().remove();
-                    alert('Strona usunięta pomyślnie');
+                    alert('Wpis usunięty pomyślnie');
                 } else {
                     alert('Wystąpił straszny błąd: '+data.error+' :(');
                 }

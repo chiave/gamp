@@ -27,10 +27,10 @@
                 <td>{{ loop.index }}</td>
                 <td>{{ file.name }}</td>
                 <td>{{ file.typeText }}</td>
-                <td>{% if file.visible %}<strong>Tak</strong>{% else %}Nie{% endif %}</td>
-                <td>Oryginalna nazwa: {{ file.originalName }}<br/>
-                    Rozszerzenie: {# {{ file.mimeType }} #} .{{ file.extension }}<br/>
-                    Rozmiar: {{ file.size }}</td>
+                <td>{% if file.visible %}Tak{% endif %}</td>
+                <td>Oryginalna nazwa:<br />
+                    {{ file.originalName }}<br/>
+                    Rozmiar: {{ file.sizeText }}</td>
                 <td>
                     <div class="button-bar">
                         <ul class="button-group">
@@ -57,7 +57,7 @@
                 if (data.success) {
                     $(this).closest('tr').remove();
                     // $(this).parent().parent().parent().parent().remove();
-                    alert('Wpis usunięty pomyślnie');
+                    alert('Plik usunięty pomyślnie');
                 } else {
                     alert('Wystąpił straszny błąd: '+data.error+' :(');
                 }

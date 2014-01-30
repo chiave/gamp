@@ -13,7 +13,8 @@
                 <th>Tytuł</th>
                 {# <th>Staticcontent</th> #}
                 {# <th>Utworzona</th> #}
-                <th>Edytowana</th>
+{#                 <th>Edytowana</th> #}
+                <th>W menu</th>
                 <th>Wpisów</th>
                 <th>
                     <a class="tiny button success" href="{{ path('cms_pages_new') }}">
@@ -29,7 +30,8 @@
                 <td>{{ page.title }}</td>
                 {#<td>{{ page.staticContent }}</td>#}
                 {# <td>{% if page.createdAt %}{{ page.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
-                <td>{% if page.updatedAt %}{{ page.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {# <td>{% if page.updatedAt %}{{ page.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
+                <td>{% if page.inMenu %}"{{ page.menuName }}"{% endif %}</td>
                 <td>{{ page.articles | length }}</td>
                 <td>
                     <div class="button-bar">
@@ -58,7 +60,7 @@
                 if (data.success) {
                     $(this).closest("tr").remove();
                     // $(this).parent().parent().parent().parent().remove();
-                    alert('Plik usunięty pomyślnie');
+                    alert('Strona usunięta pomyślnie');
                 } else {
                     alert('Wystąpił straszny błąd: '+data.error+' :(');
                 }

@@ -178,6 +178,17 @@ class Pages
     }
 
     /**
+     * Get type as text
+     *
+     * @return string
+     */
+    public function getTypeText()
+    {
+        $types = $this->getTypesArray();
+        return $types[$this->type];
+    }
+
+    /**
      * Get all types
      *
      * @return array
