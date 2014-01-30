@@ -1,0 +1,28 @@
+# Firewall / login page
+Username: Login
+Password: Hasło
+
+# Pages
+Title: Tytuł
+Type: Typ
+Short description: Krótki opis
+Static content: Treść stała
+Slug: Ścieżka w adresie
+In menu: Wyświetlaj w menu
+Menu name: Nazwa wyświetlana w menu
+Position: Pozycja w menu (1 - najwyższa)
+Icon: Ikona
+
+# Articles
+Header: Tytuł wpisu
+Expandable: Wpis rozszerzalny
+Important: Ważny wpis (dodaj do panelu bocznego)
+Content: Treść
+Publication date: Data publikacji
+
+# Files
+Name: Nazwa
+Description: Opis
+Visible: Udostępnij plik
+File: Plik
+
