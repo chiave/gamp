@@ -3,6 +3,7 @@
 namespace Chiave\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -115,12 +116,10 @@ class FilesController extends Controller
             $file,
             'cms_files_update'
             );
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'file'      => $file,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -142,7 +141,6 @@ class FilesController extends Controller
             throw $this->createNotFoundException('Unable to find Files.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createFileForm(
             $file,
             'cms_files_update'
@@ -158,7 +156,6 @@ class FilesController extends Controller
         return array(
             'file' => $file,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -171,22 +168,23 @@ class FilesController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $result = new \stdClass();
+        $result->success = false;
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $file = $em->getRepository('ChiaveCMSBundle:Files')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $file = $em->getRepository('ChiaveCMSBundle:Files')->find($id);
 
-            if (!$file) {
-                throw $this->createNotFoundException('Unable to find Files.');
-            }
-
+        if (!$file) {
+            // throw $this->createNotFoundException('Unable to find Files.');
+            $result->error = 'Unable to find Files.';
+        } else {
             $em->remove($file);
             $em->flush();
+
+            $result->success = true;
         }
 
-        return $this->redirect($this->generateUrl('cms_files'));
+        return new JsonResponse($result);
     }
 
     /**
@@ -212,22 +210,4 @@ class FilesController extends Controller
             )
         );
     }
-
-    /**
-     * Creates a form to delete page.
-     *
-     * @param mixed $id The file id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('cms_files_delete', array('id' => $id)))
-            ->setMethod('POST')
-            ->add('submit', 'submit', array('label' => 'Usuń plik'))
-            ->getForm()
-        ;
-    }
-
 }

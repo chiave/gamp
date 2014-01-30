@@ -36,7 +36,7 @@
                         <ul class="button-group">
                             <li><a class="tiny button" href="{{ path('cms_pages_show', { 'slug': page.slug }) }}">Pokaż</a></li>
                             <li><a class="tiny button" href="{{ path('cms_pages_edit', { 'id': page.id }) }}">Edytuj</a></li>
-                            <li><a class="tiny button alert" href="{{ path('cms_pages_delete', { 'id': page.id }) }}">Usuń</a></li>
+                            <li><a class="tiny button alert delete_button" href="{{ path('cms_pages_delete', { 'id': page.id }) }}">Usuń</a></li>
                         </ul>
                     </div>
                 </td>
@@ -44,4 +44,26 @@
         {% endfor %}
         </tbody>
     </table>
-    {% endblock %}
+{% endblock %}
+
+{% block javascripts -%}
+
+<script type="text/javascript">
+    $('.delete_button').click(function(e) {
+        e.preventDefault();
+
+        $.post(
+            $(this).attr('href'),
+            function(data) {
+                if (data.success) {
+                    $(this).closest("tr").remove();
+                    // $(this).parent().parent().parent().parent().remove();
+                    alert('Plik usunięty pomyślnie');
+                } else {
+                    alert('Wystąpił straszny błąd: '+data.error+' :(');
+                }
+            });
+    });
+</script>
+
+{% endblock %}

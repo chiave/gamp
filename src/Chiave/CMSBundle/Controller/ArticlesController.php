@@ -112,11 +112,8 @@ class ArticlesController extends Controller
             throw $this->createNotFoundException('Unable to find Articles.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         return array(
             'article'      => $article,
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -142,12 +139,10 @@ class ArticlesController extends Controller
             $article,
             'cms_articles_update'
             );
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'article'      => $article,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -169,8 +164,6 @@ class ArticlesController extends Controller
             throw $this->createNotFoundException('Unable to find Articles article.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         $editForm = $this->createArticleForm(
             $article,
             'cms_articles_update'
@@ -186,7 +179,6 @@ class ArticlesController extends Controller
         return array(
             'article'      => $article,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -199,22 +191,23 @@ class ArticlesController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $result = new \stdClass();
+        $result->success = false;
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $article = $em->getRepository('ChiaveCMSBundle:Articles')->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('ChiaveCMSBundle:Articles')->find($id);
 
-            if (!$article) {
-                throw $this->createNotFoundException('Unable to find Articles.');
-            }
-
+        if (!$article) {
+            // throw $this->createNotFoundException('Unable to find Articles.');
+            $result->error = 'Unable to find Articles.';
+        } else {
             $em->remove($article);
             $em->flush();
+
+            $result->success = true;
         }
 
-        return $this->redirect($this->generateUrl('cms_articles'));
+        return new JsonResponse($result);
     }
 
     /**
@@ -297,22 +290,5 @@ class ArticlesController extends Controller
                 'method' => 'post',
             )
         );
-    }
-
-    /**
-     * Creates a form to delete a Articles by id.
-     *
-     * @param mixed $id The article id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('cms_articles_delete', array('id' => $id)))
-            ->setMethod('POST')
-            ->add('submit', 'submit', array('label' => 'Usuń artykuł'))
-            ->getForm()
-        ;
     }
 }
