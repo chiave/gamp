@@ -33,8 +33,9 @@
                 if (data.success) {
                     $('#{{edit_form.parent.vars.id}}').empty().append('<option value=""></option>');
                     $.each(data.articles, function( id, name ) {
-                      $('#{{edit_form.parent.vars.id}}').append('<option value="'+id+'">'+name+'</option>');
+                        $('#{{edit_form.parent.vars.id}}').append('<option value="'+id+'">'+name+'</option>');
                     });
+                    checkFields();
                 } else {
                     alert('Wystąpił straszny błąd :(');
                 }
@@ -42,6 +43,33 @@
     });
 
     function checkFields() {
+        if ($('#{{ edit_form.type.vars.id }}').val() == 0) {
+            $('#{{ edit_form.expandable.vars.id }}').parent().slideDown();
+            $('#{{ edit_form.page.vars.id }}').parent().slideDown();
+            $('#{{ edit_form.parent.vars.id }}').parent().slideUp();
+            $('#{{ edit_form.important.vars.id }}').parent().slideDown();
+            $('#{{ edit_form.content.vars.id }}').parent().slideDown();
+
+        } else if ($('#{{ edit_form.type.vars.id }}').val() == 1 || $('#{{ edit_form.type.vars.id }}').val() == 2) {
+            $('#{{ edit_form.expandable.vars.id }}').parent().slideUp();
+
+            if ($('#{{ edit_form.parent.vars.id }}').val() != "") {
+                $('#{{ edit_form.content.vars.id }}').parent().slideDown();
+                $('#{{ edit_form.page.vars.id }}').parent().slideUp();
+                $('#{{ edit_form.important.vars.id }}').parent().slideUp();
+
+            } else if ($('#{{ edit_form.page.vars.id }}').val() != "") {
+                $('#{{ edit_form.content.vars.id }}').parent().slideUp();
+                $('#{{ edit_form.parent.vars.id }}').parent().slideUp();
+                $('#{{ edit_form.important.vars.id }}').parent().slideDown();
+
+            } else {
+                $('#{{ edit_form.content.vars.id }}').parent().slideUp();
+                $('#{{ edit_form.page.vars.id }}').parent().slideDown();
+                $('#{{ edit_form.parent.vars.id }}').parent().slideDown();
+            }
+        }
+
         if ($('#{{ edit_form.important.vars.id }}').is(':checked')) {
             $('#{{ edit_form.shortDescription.vars.id }}').parent().slideDown();
             $('#{{ edit_form.icon.vars.id }}').parent().slideDown();
@@ -50,34 +78,24 @@
             $('#{{ edit_form.icon.vars.id }}').parent().slideUp();
         }
 
-        if ($('#{{ edit_form.type.vars.id }}').val() == 0) { //wpis
-            $('#{{ edit_form.expandable.vars.id }}').parent().slideDown();
-            $('#{{ edit_form.page.vars.id }}').parent().slideDown();
-        } else {
-            $('#{{ edit_form.expandable.vars.id }}').parent().slideUp();
-            $('#{{ edit_form.page.vars.id }}').parent().slideUp();
-        }
-
-        if ($('#{{ edit_form.type.vars.id }}').val() == 1 || $('#{{ edit_form.type.vars.id }}').val() == 2) { //lista
-            $('#{{ edit_form.parent.vars.id }}').parent().slideDown();
-            $('#{{ edit_form.page.vars.id }}').parent().slideDown();
-        } else {
-            $('#{{ edit_form.parent.vars.id }}').parent().slideUp();
-            $('#{{ edit_form.page.vars.id }}').parent().slideUp();
-        }
-
-        if ($('#{{ edit_form.parent.vars.id }}').val() != 0 || $('#{{ edit_form.type.vars.id }}').val() == 0) {
-            $('#{{ edit_form.content.vars.id }}').parent().slideDown();
-        } else {
-            $('#{{ edit_form.content.vars.id }}').parent().slideUp();
-        }
     }
 
-    $('#{{ edit_form.important.vars.id }}, #{{ edit_form.type.vars.id }}, #{{ edit_form.parent.vars.id }}').change(function(){
+    $('#{{ edit_form.important.vars.id }}, #{{ edit_form.type.vars.id }}, #{{ edit_form.parent.vars.id }}, #{{ edit_form.page.vars.id }}').change(function(){
         checkFields();
     });
 
     checkFields();
+
+    $('form').submit(function(e) {
+        $('#{{ edit_form.vars.id }} :input').each(function() {
+            if($(this).is(':hidden') && $(this).attr('id') != '{{ edit_form._token.vars.id }}') {
+                $(this).val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected')
+                ;
+            }
+        });
+    });
 
 </script>
 

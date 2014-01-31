@@ -28,26 +28,28 @@ class ArticlesType extends AbstractType
             )
             ->add('expandable')
 
-            ->add('important')
-            ->add('shortDescription')
-            ->add('icon', 'entity', array(
-                    'class' => 'ChiaveCMSBundle:Files',
-                    'query_builder' => function(EntityRepository $er) {
-                        return $er->createQueryBuilder('f')
-                            //->where('f.type IN (0, 5)') //5 == TYPE_ICON
-                            ->where('f.type = 5') //5 == TYPE_ICON
-                            ->orderBy('f.name', 'ASC');
-                    },
-                    'required' => false,
-                )
-            )
-
+            ->add('page')
             ->add('parent', null, array(
                 'required' => false,
                 )
             )
+
+            ->add('important')
+                ->add('shortDescription')
+                ->add('icon', 'entity', array(
+                        'class' => 'ChiaveCMSBundle:Files',
+                        'query_builder' => function(EntityRepository $er) {
+                            return $er->createQueryBuilder('f')
+                                //->where('f.type IN (0, 5)') //5 == TYPE_ICON
+                                ->where('f.type = 5') //5 == TYPE_ICON
+                                ->orderBy('f.name', 'ASC');
+                        },
+                        'required' => false,
+                    )
+                )
+
             ->add('content')
-            ->add('page')
+
             // ->add('publicationDate')
             //
 //<input type="text" value="2012-05-15 21:05" class="fdatetimepicker" data-date-format="yyyy-mm-dd hh:ii">

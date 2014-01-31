@@ -33,8 +33,9 @@
                 if (data.success) {
                     $('#{{form.parent.vars.id}}').empty().append('<option value=""></option>');
                     $.each(data.articles, function( id, name ) {
-                      $('#{{form.parent.vars.id}}').append('<option value="'+id+'">'+name+'</option>');
+                        $('#{{form.parent.vars.id}}').append('<option value="'+id+'">'+name+'</option>');
                     });
+                    checkFields();
                 } else {
                     alert('Wystąpił straszny błąd :(');
                 }
@@ -44,6 +45,33 @@
     $('#{{form.type.vars.id}}').change();
 
     function checkFields() {
+        if ($('#{{ form.type.vars.id }}').val() == 0) {
+            $('#{{ form.expandable.vars.id }}').parent().slideDown();
+            $('#{{ form.page.vars.id }}').parent().slideDown();
+            $('#{{ form.parent.vars.id }}').parent().slideUp();
+            $('#{{ form.important.vars.id }}').parent().slideDown();
+            $('#{{ form.content.vars.id }}').parent().slideDown();
+
+        } else if ($('#{{ form.type.vars.id }}').val() == 1 || $('#{{ form.type.vars.id }}').val() == 2) {
+            $('#{{ form.expandable.vars.id }}').parent().slideUp();
+
+            if ($('#{{ form.parent.vars.id }}').val() != "") {
+                $('#{{ form.content.vars.id }}').parent().slideDown();
+                $('#{{ form.page.vars.id }}').parent().slideUp();
+                $('#{{ form.important.vars.id }}').parent().slideUp();
+
+            } else if ($('#{{ form.page.vars.id }}').val() != "") {
+                $('#{{ form.content.vars.id }}').parent().slideUp();
+                $('#{{ form.parent.vars.id }}').parent().slideUp();
+                $('#{{ form.important.vars.id }}').parent().slideDown();
+
+            } else {
+                $('#{{ form.content.vars.id }}').parent().slideUp();
+                $('#{{ form.page.vars.id }}').parent().slideDown();
+                $('#{{ form.parent.vars.id }}').parent().slideDown();
+            }
+        }
+
         if ($('#{{ form.important.vars.id }}').is(':checked')) {
             $('#{{ form.shortDescription.vars.id }}').parent().slideDown();
             $('#{{ form.icon.vars.id }}').parent().slideDown();
@@ -52,38 +80,24 @@
             $('#{{ form.icon.vars.id }}').parent().slideUp();
         }
 
-        if ($('#{{ form.type.vars.id }}').val() == 0) { //wpis
-            $('#{{ form.expandable.vars.id }}').parent().slideDown();
-            $('#{{ form.page.vars.id }}').parent().slideDown();
-        } else {
-            $('#{{ form.expandable.vars.id }}').parent().slideUp();
-            $('#{{ form.page.vars.id }}').parent().slideUp();
-        }
-
-        if ($('#{{ form.type.vars.id }}').val() == 1 || $('#{{ form.type.vars.id }}').val() == 2) {
-            $('#{{ form.parent.vars.id }}').parent().slideDown();
-            $('#{{ form.page.vars.id }}').parent().slideDown();
-        } else {
-            $('#{{ form.parent.vars.id }}').parent().slideUp();
-            $('#{{ form.page.vars.id }}').parent().slideUp();
-        }
-
-        if ($('#{{ form.parent.vars.id }}').val() != 0 || $('#{{ form.type.vars.id }}').val() == 0) {
-            $('#{{ form.content.vars.id }}').parent().slideDown();
-        } else {
-            $('#{{ form.content.vars.id }}').parent().slideUp();
-        }
-
     }
 
-    $('#{{ form.important.vars.id }}, #{{ form.type.vars.id }}, #{{ form.parent.vars.id }}').change(function(){
+    $('#{{ form.important.vars.id }}, #{{ form.type.vars.id }}, #{{ form.parent.vars.id }}, #{{ form.page.vars.id }}').change(function(){
         checkFields();
     });
 
     checkFields();
 
-
-
+    $('form').submit(function(e) {
+        $('#{{ form.vars.id }} :input').each(function() {
+            if($(this).is(':hidden') && $(this).attr('id') != '{{ form._token.vars.id }}') {
+                $(this).val('')
+                      .removeAttr('checked')
+                      .removeAttr('selected')
+                ;
+            }
+        });
+    });
 
 </script>
 
