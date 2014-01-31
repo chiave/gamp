@@ -35,8 +35,16 @@
 }
 
 .header-intro {
+    background: url("../images/background.png") no-repeat scroll 0 0 / 100% 95% rgba(0, 0, 0, 0);
     padding: 10px 20px;
-    /* insert background image here */
+}
+
+.header-intro h1 {
+    padding-left: 1em;
+}
+
+.header-intro h4 {
+    padding-left: 6em;
 }
 
 th .button {
