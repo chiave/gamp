@@ -19,6 +19,8 @@ Expandable: Wpis rozszerzalny
 Important: Ważny wpis (dodaj do panelu bocznego)
 Content: Treść
 Publication date: Data publikacji
+Page: Dodaj artykuł do strony
+Parent: Wpis - rodzic
 
 # Files
 Name: Nazwa
@@ -26,3 +28,9 @@ Description: Opis
 Visible: Udostępnij plik
 File: Plik
 
+# Front - form in contact
+Firstname: Imię
+Lastname: Nazwisko
+Email: Adres e-mail
+Phone: Nr telefonu
+Message: Twoja wiadomość
