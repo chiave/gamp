@@ -579,6 +579,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	padding:7px 10px 10px 0px;;
 	line-height:21px;
 }
+.plainMeta li
+{
+	padding:0px;
+}
+
 .plainMeta span
 {
 	color: #AC5896;
@@ -649,7 +654,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	background: url(../images/plainMeta_bg.png);
 	border-radius:5px;
 }
-.tabWrapper ul
+.tabWrapper ul:FIRST-CHILD 
 {
 	display:block;
 	width:600px;
@@ -657,7 +662,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	height:27px;
 	padding-left:25px;
 }
-.tabWrapper li
+.tabWrapper ul:FIRST-CHILD li
 {
 	color:white;
 	width:200px;
@@ -675,7 +680,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 }
 .tabWrapper li.active
 {
-	background: #AC5896;
+	background: #AC5896!important;
 
 }
 .tabWrapper .plainMeta p
