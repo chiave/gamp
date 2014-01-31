@@ -11,7 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 use Chiave\CMSBundle\Entity\Articles;
+use Chiave\CMSBundle\Entity\Entries;
+
 use Chiave\CMSBundle\Form\ArticlesType;
 
 /**
@@ -53,10 +57,12 @@ class ArticlesController extends Controller
     public function createAction(Request $request)
     {
         $article = new Articles();
+
         $form = $this->createArticleForm(
             $article,
             'cms_articles_create'
             );
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -84,6 +90,7 @@ class ArticlesController extends Controller
     public function newAction()
     {
         $article = new Articles();
+
         $form = $this->createArticleForm(
             $article,
             'cms_articles_create'
@@ -164,6 +171,12 @@ class ArticlesController extends Controller
             throw $this->createNotFoundException('Unable to find Articles article.');
         }
 
+        $originalEntries = new ArrayCollection();
+
+        foreach ($article->getEntries() as $entry) {
+            $originalEntries->add($entry);
+        }
+
         $editForm = $this->createArticleForm(
             $article,
             'cms_articles_update'
@@ -171,6 +184,13 @@ class ArticlesController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            foreach ($originalEntries as $entry) {
+                if ($article->getEntries()->contains($entry)  === false) {
+                    $em->remove($entry);
+                }
+            }
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('cms_articles_edit', array('id' => $id)));
@@ -210,41 +230,41 @@ class ArticlesController extends Controller
         return new JsonResponse($result);
     }
 
-    /**
-     * Action for parent choosing based on current value of "type" field.
-     *
-     * @Route("/admin/articles/types/{type}", name="cms_articles_types")
-     * @Method("POST")
-     * @Security("has_role('ROLE_ADMIN')")
-     */
-    public function articlesByTypeAction(Request $request, $type)
-    {
-        $result = new \stdClass();
-        $result->success = false;
+    // /**
+    //  * Action for parent choosing based on current value of "type" field.
+    //  *
+    //  * @Route("/admin/articles/types/{type}", name="cms_articles_types")
+    //  * @Method("POST")
+    //  * @Security("has_role('ROLE_ADMIN')")
+    //  */
+    // public function articlesByTypeAction(Request $request, $type)
+    // {
+    //     $result = new \stdClass();
+    //     $result->success = false;
 
-        $result->articles = array();
-        //if ($type != 0) { // TODO: insert TYPE_REGULAR contant here
-            $articlesByType = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('ChiaveCMSBundle:Articles')
-                ->findBy(
-                    array(
-                        'type' => $type,
-                        'parent' => null,
-                    ),
-                    array('header' => 'ASC')
-                );
+    //     $result->articles = array();
+    //     //if ($type != 0) { // TODO: insert TYPE_REGULAR contant here
+    //         $articlesByType = $this->getDoctrine()
+    //             ->getManager()
+    //             ->getRepository('ChiaveCMSBundle:Articles')
+    //             ->findBy(
+    //                 array(
+    //                     'type' => $type,
+    //                     'parent' => null,
+    //                 ),
+    //                 array('header' => 'ASC')
+    //             );
 
-            foreach ($articlesByType as $article) {
-                $result->articles[$article->getId()] = $article->getHeader();
-            }
-        //}
+    //         foreach ($articlesByType as $article) {
+    //             $result->articles[$article->getId()] = $article->getHeader();
+    //         }
+    //     //}
 
-        $result->success = true;
-        return new JsonResponse(
-                $result
-                );
-    }
+    //     $result->success = true;
+    //     return new JsonResponse(
+    //             $result
+    //             );
+    // }
 
     /**
      * Get latest n important articles.

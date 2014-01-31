@@ -12,7 +12,7 @@ use Chiave\CMSBundle\Entity\Articles;
 
 class ArticlesType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -29,8 +29,12 @@ class ArticlesType extends AbstractType
             ->add('expandable')
 
             ->add('page')
-            ->add('parent', null, array(
-                'required' => false,
+
+            ->add('entries', 'collection', array(
+                    'type' => new EntriesType(),
+                    'allow_add'    => true,
+                    'by_reference' => false,
+                    'allow_delete' => true,
                 )
             )
 

@@ -7,7 +7,25 @@
 
 {% block body -%}
 
-    {{ form(edit_form) }}
+    {{ form_start(edit_form) }}
+        {{ form_row(edit_form.header) }}
+        {{ form_row(edit_form.staticContent) }}
+        {{ form_row(edit_form.important) }}
+        {{ form_row(edit_form.type) }}
+        {{ form_row(edit_form.expandable) }}
+        {{ form_row(edit_form.page) }}
+        <div class="entries" data-prototype="{{ form_widget(edit_form.entries.vars.prototype)|e }}">
+            {# iterate over each existing entry and render its only field: name #}
+            {% for entry in edit_form.entries %}
+                <div class="entry">
+                    {{ form_row(entry.header) }}
+                    {{ form_row(entry.content) }}
+                </div>
+            {% endfor %}
+        </div>
+        {{ form_row(edit_form.content) }}
+        {{ form_row(edit_form.publicationDate) }}
+    {{ form_end(edit_form) }}
 
     <a class="button small" href="{{ path('cms_articles') }}">
         Powrót do listy artykułów
@@ -21,10 +39,20 @@
 
     $('.fdatetimepicker').fdatetimepicker({
         format: 'yyyy-mm-dd hh:ii:ss',
-        language: 'de'
+        language: 'pl'
 	});
-    CKEDITOR.replace( '{{ edit_form.content.vars.id }}' );
 
+    //Do not work!
+    CKEconfig = {
+        height: 5000,
+    };
+
+    CKEDITOR.replace( '{{ edit_form.content.vars.id }}', CKEconfig);
+    $('.entry .content').each(function(key, input) {
+        CKEDITOR.replace($(input).attr('id'), CKEconfig);
+    });
+
+    {#
     $('#{{edit_form.type.vars.id}}').change(function() {
         var url = "{{ path('cms_articles_types', {type:'__type__'}) }}";
         $.post(
@@ -41,33 +69,18 @@
                 }
             });
     });
+    #}
 
     function checkFields() {
         if ($('#{{ edit_form.type.vars.id }}').val() == 0) {
             $('#{{ edit_form.expandable.vars.id }}').parent().slideDown();
-            $('#{{ edit_form.page.vars.id }}').parent().slideDown();
-            $('#{{ edit_form.parent.vars.id }}').parent().slideUp();
-            $('#{{ edit_form.important.vars.id }}').parent().slideDown();
             $('#{{ edit_form.content.vars.id }}').parent().slideDown();
+            $('.entries').slideUp();
 
         } else if ($('#{{ edit_form.type.vars.id }}').val() == 1 || $('#{{ edit_form.type.vars.id }}').val() == 2) {
             $('#{{ edit_form.expandable.vars.id }}').parent().slideUp();
-
-            if ($('#{{ edit_form.parent.vars.id }}').val() != "") {
-                $('#{{ edit_form.content.vars.id }}').parent().slideDown();
-                $('#{{ edit_form.page.vars.id }}').parent().slideUp();
-                $('#{{ edit_form.important.vars.id }}').parent().slideUp();
-
-            } else if ($('#{{ edit_form.page.vars.id }}').val() != "") {
-                $('#{{ edit_form.content.vars.id }}').parent().slideUp();
-                $('#{{ edit_form.parent.vars.id }}').parent().slideUp();
-                $('#{{ edit_form.important.vars.id }}').parent().slideDown();
-
-            } else {
-                $('#{{ edit_form.content.vars.id }}').parent().slideUp();
-                $('#{{ edit_form.page.vars.id }}').parent().slideDown();
-                $('#{{ edit_form.parent.vars.id }}').parent().slideDown();
-            }
+            $('#{{ edit_form.content.vars.id }}').parent().slideUp();
+            $('.entries').slideDown();
         }
 
         if ($('#{{ edit_form.important.vars.id }}').is(':checked')) {
@@ -77,10 +90,9 @@
             $('#{{ edit_form.shortDescription.vars.id }}').parent().slideUp();
             $('#{{ edit_form.icon.vars.id }}').parent().slideUp();
         }
-
     }
 
-    $('#{{ edit_form.important.vars.id }}, #{{ edit_form.type.vars.id }}, #{{ edit_form.parent.vars.id }}, #{{ edit_form.page.vars.id }}').change(function(){
+    $('#{{ edit_form.important.vars.id }}, #{{ edit_form.type.vars.id }}, #{{ edit_form.page.vars.id }}').change(function(){
         checkFields();
     });
 
@@ -96,6 +108,60 @@
             }
         });
     });
+
+
+
+
+    var $collectionHolder;
+
+    var $addEntryLink = $('<a href="#" class="add_entry_link button tiny right">Dodaj podelement</a>');
+    var $newLink = $('<div></div>').append($addEntryLink);
+
+    $(document).ready(function() {
+        $collectionHolder = $('div.entries');
+
+        $collectionHolder.find('div.entry').each(function() {
+            addEntryFormDeleteLink($(this));
+        });
+
+        $collectionHolder.append($newLink);
+
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addEntryLink.on('click', function(e) {
+            e.preventDefault();
+
+            addEntryForm($collectionHolder, $newLink);
+        });
+    });
+
+    function addEntryForm($collectionHolder, $newLink) {
+        var prototype = $collectionHolder.data('prototype');
+
+        var index = $collectionHolder.data('index');
+
+        var newForm = prototype.replace(/__name__/g, index);
+
+        $collectionHolder.data('index', index + 1);
+
+        var $newFormLi = $('<div class="entry"></div>').append(newForm);
+        $newLink.before($newFormLi);
+
+        addEntryFormDeleteLink($newFormLi);
+
+        CKEDITOR.replace($(newForm).find('.content').attr('id'), CKEconfig);
+    }
+
+    function addEntryFormDeleteLink($entryFormLi) {
+        var $removeFormA = $('<a href="#" class="button tiny alert">Usuń</a>');
+        $entryFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function(e) {
+            e.preventDefault();
+
+            $entryFormLi.remove();
+        });
+    }
 
 </script>
 

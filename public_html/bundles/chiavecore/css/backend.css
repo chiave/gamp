@@ -47,3 +47,10 @@
 th .button {
     margin: 0;
 }
+
+.entry {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #E6E6E6;
+    margin-bottom: 15px;
+    padding: 10px;
+}

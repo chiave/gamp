@@ -72,15 +72,14 @@ class Articles
     private $expandable = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Articles", inversedBy="childrens")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
-     */
-    private $parent;
-
-    /**
      * @ORM\OneToMany(targetEntity="Articles", mappedBy="parent")
      */
     private $childrens;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Entries", mappedBy="article", cascade={"all"})
+     */
+    private $entries;
 
     /**
      * @var string
@@ -368,6 +367,40 @@ class Articles
     public function getChildrens()
     {
         return $this->childrens;
+    }
+
+    /**
+     * Add entry
+     *
+     * @param \Chiave\CMSBundle\Entity\Entries $enty
+     * @return Articles
+     */
+    public function addEntry(\Chiave\CMSBundle\Entity\Entries $entry)
+    {
+        $entry->setArticle($this);
+        $this->entries[] = $entry;
+
+        return $this;
+    }
+
+    /**
+     * Remove entry
+     *
+     * @param \Chiave\CMSBundle\Entity\Entries $entry
+     */
+    public function removeEntry(\Chiave\CMSBundle\Entity\Entries $entry)
+    {
+        $this->entries->removeElement($entry);
+    }
+
+    /**
+     * Get entries
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEntries()
+    {
+        return $this->entries;
     }
 
     /**

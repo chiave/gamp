@@ -7,11 +7,25 @@
 
 {% block body -%}
 
-    {{ form(form) }}
-
-    <a class="button small" href="{{ path('cms_articles') }}">
-        Powrót do listy artykułów
-    </a>
+    {{ form_start(form) }}
+        {{ form_row(form.header) }}
+        {{ form_row(form.staticContent) }}
+        {{ form_row(form.important) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.expandable) }}
+        {{ form_row(form.page) }}
+        <div class="entries" data-prototype="{{ form_widget(form.entries.vars.prototype)|e }}">
+            {# iterate over each existing entry and render its only field: name #}
+            {% for entry in form.entries %}
+                <div class="entry">
+                    {{ form_row(entry.header) }}
+                    {{ form_row(entry.content) }}
+                </div>
+            {% endfor %}
+        </div>
+        {{ form_row(form.content) }}
+        {{ form_row(form.publicationDate) }}
+    {{ form_end(form) }}
 
 {% endblock %}
 
@@ -23,8 +37,15 @@
         format: 'yyyy-mm-dd hh:ii:ss',
         language: 'pl'
 	});
-    CKEDITOR.replace( '{{ form.content.vars.id }}' );
 
+    //Do not work!
+    CKEconfig = {
+        height: 500,
+    };
+
+    CKEDITOR.replace('{{ form.content.vars.id }}', CKEconfig);
+
+    {#
     $('#{{form.type.vars.id}}').change(function() {
         var url = "{{ path('cms_articles_types', {type:'__type__'}) }}";
         $.post(
@@ -41,35 +62,18 @@
                 }
             });
     });
-
-    $('#{{form.type.vars.id}}').change();
+    #}
 
     function checkFields() {
         if ($('#{{ form.type.vars.id }}').val() == 0) {
             $('#{{ form.expandable.vars.id }}').parent().slideDown();
-            $('#{{ form.page.vars.id }}').parent().slideDown();
-            $('#{{ form.parent.vars.id }}').parent().slideUp();
-            $('#{{ form.important.vars.id }}').parent().slideDown();
             $('#{{ form.content.vars.id }}').parent().slideDown();
+            $('.entries').slideUp();
 
         } else if ($('#{{ form.type.vars.id }}').val() == 1 || $('#{{ form.type.vars.id }}').val() == 2) {
             $('#{{ form.expandable.vars.id }}').parent().slideUp();
-
-            if ($('#{{ form.parent.vars.id }}').val() != "") {
-                $('#{{ form.content.vars.id }}').parent().slideDown();
-                $('#{{ form.page.vars.id }}').parent().slideUp();
-                $('#{{ form.important.vars.id }}').parent().slideUp();
-
-            } else if ($('#{{ form.page.vars.id }}').val() != "") {
-                $('#{{ form.content.vars.id }}').parent().slideUp();
-                $('#{{ form.parent.vars.id }}').parent().slideUp();
-                $('#{{ form.important.vars.id }}').parent().slideDown();
-
-            } else {
-                $('#{{ form.content.vars.id }}').parent().slideUp();
-                $('#{{ form.page.vars.id }}').parent().slideDown();
-                $('#{{ form.parent.vars.id }}').parent().slideDown();
-            }
+            $('#{{ form.content.vars.id }}').parent().slideUp();
+            $('.entries').slideDown();
         }
 
         if ($('#{{ form.important.vars.id }}').is(':checked')) {
@@ -79,10 +83,9 @@
             $('#{{ form.shortDescription.vars.id }}').parent().slideUp();
             $('#{{ form.icon.vars.id }}').parent().slideUp();
         }
-
     }
 
-    $('#{{ form.important.vars.id }}, #{{ form.type.vars.id }}, #{{ form.parent.vars.id }}, #{{ form.page.vars.id }}').change(function(){
+    $('#{{ form.important.vars.id }}, #{{ form.type.vars.id }}, #{{ form.page.vars.id }}').change(function(){
         checkFields();
     });
 
@@ -98,6 +101,60 @@
             }
         });
     });
+
+
+
+
+    var $collectionHolder;
+
+    var $addEntryLink = $('<a href="#" class="add_entry_link button tiny right">Dodaj podelement</a>');
+    var $newLink = $('<div></div>').append($addEntryLink);
+
+    $(document).ready(function() {
+        $collectionHolder = $('div.entries');
+
+        $collectionHolder.find('div.entry').each(function() {
+            addEntryFormDeleteLink($(this));
+        });
+
+        $collectionHolder.append($newLink);
+
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addEntryLink.on('click', function(e) {
+            e.preventDefault();
+
+            addEntryForm($collectionHolder, $newLink);
+        });
+    });
+
+    function addEntryForm($collectionHolder, $newLink) {
+        var prototype = $collectionHolder.data('prototype');
+
+        var index = $collectionHolder.data('index');
+
+        var newForm = prototype.replace(/__name__/g, index);
+
+        $collectionHolder.data('index', index + 1);
+
+        var $newFormLi = $('<div class="entry"></div>').append(newForm);
+        $newLink.before($newFormLi);
+
+        addEntryFormDeleteLink($newFormLi);
+
+        CKEDITOR.replace($(newForm).find('.content').attr('id'), CKEconfig);
+    }
+
+    function addEntryFormDeleteLink($entryFormLi) {
+        var $removeFormA = $('<a href="#" class="button tiny alert">Usuń</a>');
+        $entryFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function(e) {
+            e.preventDefault();
+
+            $entryFormLi.remove();
+        });
+    }
 
 </script>
 
