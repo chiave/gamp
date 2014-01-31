@@ -59,6 +59,7 @@ class Pages
 
     /**
      * @ORM\OneToMany(targetEntity="Articles", mappedBy="page")
+     * @ORM\OrderBy({"publicationDate" = "DESC"})
      **/
     private $articles;
 

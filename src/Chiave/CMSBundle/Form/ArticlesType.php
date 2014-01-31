@@ -21,12 +21,12 @@ class ArticlesType extends AbstractType
         $now = new \DateTime('now');
         $builder
             ->add('header')
-            ->add('staticContent')
             ->add('type', 'choice', array(
                 'choices'   => Articles::getTypesArray()
                 )
             )
             ->add('expandable')
+            ->add('staticContent')
 
             ->add('page')
 

@@ -1,51 +1,62 @@
-{% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Articles</h1>
+    {% if article.type == 0 and article.getExpandable %}
+        {# expandable regular article #}
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Shortcontent</th>
-                <td>{{ entity.shortContent }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ entity.content }}</td>
-            </tr>
-            <tr>
-                <th>Important</th>
-                <td>{{ entity.important }}</td>
-            </tr>
-            <tr>
-                <th>Publicationdate</th>
-                <td>{{ entity.publicationDate|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{{ entity.updatedAt|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="plainMeta borderBottomGrey">
+            <h1 class="mainHeader">{{ article.header }}</h1>
+            <p>{{ article.staticContent }}</p>
+            <span id="plainBoxToggle">więcej...</span>
+            <div id="plainBoxTarget">
+                {{ article.content | raw }}
+                <span id="plainBoxToggle2">mniej...</span>
+            </div>
+        </div><!-- end div plainMeta -->
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('cms_articles') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('cms_articles_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-</ul>
-{% endblock %}
+    {% elseif article.type == 0 and not article.getExpandable %}
+        {# regular article #}
+
+        <div class="plainMeta borderBottomGrey">
+            <h1 class="mainHeader">{{ article.header }}</h1>
+            <p>{{ article.staticContent }}</p>
+            {{ article.content | raw }}
+        </div>
+
+    {% elseif article.type == 1 %}
+        {# list #}
+
+        <div class="slideList">
+            <div class="toggleWrapper">
+                <h1 class='mainHeader'>{{ article.header }}</h1>
+                <p>{{ article.staticContent }}</p>
+                {% for entry in article.entries %}
+                    <div class="listToggle">
+                        <h4>{{ entry.header }}</h4>
+                    </div>
+                    <div class="more">
+                        {{ entry.content | raw }}
+                        <div class="hide"><span>Ukryj</span></div>
+                    </div><!-- end more -->
+                {% endfor %}
+            </div>
+        </div><!-- end div slideList -->
+
+    {% elseif article.type == 2%}
+        {# tabs #}
+
+        <div class="tabWrapper">
+            <ul>
+                {% for entry in article.entries %}
+                    <li id="li{{ loop.index }}" {% if loop.first %}class="active"{% endif %}>{{ entry.header }}</li>
+                {% endfor %}
+            </ul>
+            {% for entry in article.entries %}
+                <div id="tab{{ loop.index }}">
+                    <div class="plainMeta">
+                        <h1 class="headerTab">{{ entry.header }}</h1>
+                        {{ entry.content | raw }}
+                    </div>
+                </div><!-- end tab{{ loop.index }} -->
+            {% endfor %}
+        </div><!-- end tabWrapper -->
+
+    {% endif %}

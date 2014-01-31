@@ -2,77 +2,15 @@
 
 {% block body -%}
         {{ page.staticContent }}
-        {% for article in page.articles %}
-            {% if article.type == 0 and not article.getExpandable %}
-                {# regular article #}
-                <div class="plainMeta borderBottomGrey">
-                    <h1 class="mainHeader">{{ article.header }}</h1>
-                    {{ article.content | raw }}
-                </div>
-            {% elseif article.type == 0 and article.getExpandable %}
-                {# expandable regular article #}
-                <div class="plainMeta borderBottomGrey">
-                    <h1 class="mainHeader">{{ article.header }}</h1>
-                    <p>{{ article.staticContent }}</p>
-                    <span id="plainBoxToggle">więcej...</span>
-                    <div id="plainBoxTarget">
-                        {{ article.content | raw }}
-                        <span id="plainBoxToggle2">mniej...</span>
-                    </div>
-                </div><!-- end div plainMeta -->
-            {% elseif article.type == 1%}
-                {# list #}
-                <div class="slideList">
-                    <div class="toggleWrapper">
-                        <h1 class='mainHeader'>{{ article.header }}</h1>
-                        {% for art in article.childrens %}
-                            <div class="listToggle">
-                                <h4>{{ art.header }}</h4>
-                            </div>
-                            <div class="more">
-                                {{ art.content | raw }}
-                                <div class="hide"><span>Ukryj</span></div>
-                            </div><!-- end more -->
-                        {% endfor %}
-                    </div>
-                </div><!-- end div slideList -->
-            {% elseif article.type == 2%}
-                {# tabs #}
-                <div class="tabWrapper">
-                    <ul>
-                        {% for art in article.childrens %}
-                            <li id="li{{ loop.index }}" {% if loop.first %}class="active"{% endif %}>{{ art.header }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% for art in article.childrens %}
-                        <div id="tab{{ loop.index }}">
-                            <div class="plainMeta">
-                                <h1 class="headerTab">{{ art.header }}</h1>
-                                {{ art.content | raw }}
-                            </div>
-                        </div><!-- end tab{{ loop.index }} -->\
-                    {% endfor %}
-                </div><!-- end tabWrapper -->
-            {% endif %}
 
-            {# regular article #}
-            {# listbox?! dafaq! #}
-            {#
-            <div class="listBox">
-                <h1 class="headerOrange2"> PRZEJĘCIE ZARZĄDU PRZEBIEGA W NASTĘPUJĄCY SPOSÓB:</h1>
-                <p><span>1.</span>sporządzenie protokołu zdawczo-odbiorczego z przekazania nieruchomości: budynków, budowli i środków trwałych oraz sporządzenie dokumentacji fotograficznej,</p>
-                <p><span>2.</span>sporządzenie protokołu zdawczo-odbiorczego przejęcia dokumentacji technicznej: budowlanej, powykonawczej i książki obiektu budowlanego wraz z protokołami,</p>
-                <p><span>3.</span>sporządzenie protokołu z przejęcia dokumentacji eksploatacyjnej (umów na dostawę mediów, umów z najemcami i dzierżawcami itp.)</p>
-                <p><span>4.</span>sporządzenie protokołu z przejęcia dokumentacji finansowej od dotychczasowego administratora lub zarządcy nieruchomości,</p>
-                <p><span>5.</span>powiadomienie wszystkich właścicieli o przejęciu zarządu nad nieruchomością.</p>
-            </div>
-            #}
+        {% for article in page.articles %}
+            {{ render(controller('ChiaveCMSBundle:Articles:show', { id: article.id })) }}
         {% endfor %}
 
         {% if page.type == 1 %}
 
+            <h1 class="mainHeader">FORMULARZE KONTAKTOWE</h1>
             <div class="tabWrapper">
-                <h1 class="mainHeader">FORMULARZE KONTAKTOWE</h1>
                 <ul>
                     <li id="li1" class="active">FORMULARZ KONTAKTOWY</li>
                     <li id="li2">FORMULARZ ZGŁOSZENIOWY</li>
@@ -90,18 +28,23 @@
             </div><!-- end tabWrapper -->
 
         {% elseif page.type == 2 %}
+
             <div class="boxWrapper">
                 {{ render(controller('ChiaveCMSBundle:Pages:renderMainPage')) }}
             </div><!--  end div boxWrapper -->
 
         {% elseif page.type == 3 %}
+
             <div class="plainMeta borderBottomGrey">
                 {{ render(controller('ChiaveCMSBundle:Pages:renderDownloadPage')) }}
             </div>
+
         {% elseif page.type == 4 %}
+
             <div class="plainMeta borderBottomGrey">
                 {{ render(controller('ChiaveCMSBundle:Pages:renderGalleryPage')) }}
             </div>
+
         {% endif %}
 {% endblock %}
 

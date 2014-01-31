@@ -72,11 +72,6 @@ class Articles
     private $expandable = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="Articles", mappedBy="parent")
-     */
-    private $childrens;
-
-    /**
      * @ORM\OneToMany(targetEntity="Entries", mappedBy="article", cascade={"all"})
      */
     private $entries;
@@ -122,18 +117,6 @@ class Articles
      */
     private $updatedAt;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="root", type="boolean", nullable=true)
-     */
-    private $root = false;
-
-
-    public function __construct()
-    {
-        $this->childrens = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     public function __toString()
     {
@@ -337,39 +320,6 @@ class Articles
     }
 
     /**
-     * Add childrens
-     *
-     * @param \Chiave\CMSBundle\Entity\Articles $childrens
-     * @return Articles
-     */
-    public function addChildren(\Chiave\CMSBundle\Entity\Articles $childrens)
-    {
-        $this->childrens[] = $childrens;
-
-        return $this;
-    }
-
-    /**
-     * Remove childrens
-     *
-     * @param \Chiave\CMSBundle\Entity\Articles $childrens
-     */
-    public function removeChildren(\Chiave\CMSBundle\Entity\Articles $childrens)
-    {
-        $this->childrens->removeElement($childrens);
-    }
-
-    /**
-     * Get childrens
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getChildrens()
-    {
-        return $this->childrens;
-    }
-
-    /**
      * Add entry
      *
      * @param \Chiave\CMSBundle\Entity\Entries $enty
@@ -556,42 +506,5 @@ class Articles
     public function setUpdatedTimestamps()
     {
         $this->updatedAt = new \DateTime('now');
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    private function setRoot()
-    {
-        if ($this->type == TYPE_REGULAR
-            // || $this->page != null
-            || $this->parent == null
-            || $this->childrens != null
-            ) {
-            $this->root = true;
-        }
-
-        $this->root = false;
-    }
-
-    /**
-     * Is root
-     *
-     * @return boolean
-     */
-    public function isRoot()
-    {
-        return $this->root;
-    }
-
-    /**
-     * Get root
-     *
-     * @return boolean
-     */
-    public function getRoot()
-    {
-        return $this->root;
     }
 }

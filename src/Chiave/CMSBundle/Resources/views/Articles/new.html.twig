@@ -9,11 +9,11 @@
 
     {{ form_start(form) }}
         {{ form_row(form.header) }}
-        {{ form_row(form.staticContent) }}
+        {{ form_row(form.page) }}
         {{ form_row(form.important) }}
         {{ form_row(form.type) }}
         {{ form_row(form.expandable) }}
-        {{ form_row(form.page) }}
+        {{ form_row(form.staticContent) }}
         <div class="entries" data-prototype="{{ form_widget(form.entries.vars.prototype)|e }}">
             {# iterate over each existing entry and render its only field: name #}
             {% for entry in form.entries %}
