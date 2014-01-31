@@ -1,12 +1,9 @@
-.login-ext {
-    text-align: center;
-}
-
-.login-int {
-    margin: auto;
+.login {
+    display: block;
+    float: none;
+    margin: 15% auto;
     text-align: left;
     width: 200px;
-    display: block;
 }
 
 .records_list th:last-child {
