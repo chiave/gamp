@@ -51,12 +51,13 @@
     $('.delete_button').click(function(e) {
         e.preventDefault();
 
+        var toRemove = $(this).closest('tr');
+
         $.post(
             $(this).attr('href'),
             function(data) {
                 if (data.success) {
-                    $(this).closest('tr').remove();
-                    // $(this).parent().parent().parent().parent().remove();
+                    $(toRemove).remove();
                     alert('Plik usunięty pomyślnie');
                 } else {
                     alert('Wystąpił straszny błąd: '+data.error+' :(');

@@ -257,9 +257,9 @@ class Pages
      * @param \Chiave\CMSBundle\Entity\Articles $articles
      * @return Pages
      */
-    public function addArticle(\Chiave\CMSBundle\Entity\Articles $articles)
+    public function addArticle(\Chiave\CMSBundle\Entity\Articles $article)
     {
-        $this->articles[] = $articles;
+        $this->articles[] = $article;
 
         return $this;
     }
@@ -269,9 +269,9 @@ class Pages
      *
      * @param \Chiave\CMSBundle\Entity\Articles $articles
      */
-    public function removeArticle(\Chiave\CMSBundle\Entity\Articles $articles)
+    public function removeArticle(\Chiave\CMSBundle\Entity\Articles $article)
     {
-        $this->articles->removeElement($articles);
+        $this->articles->removeElement($article);
     }
 
     /**
