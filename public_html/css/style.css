@@ -3,6 +3,7 @@
     -moz-box-sizing: content-box;
 }
 
+
 body, html
 {
 	width:100%;
@@ -181,6 +182,10 @@ body
 	margin-top:5px;
 	margin-left:17px;
     width:988px;
+}
+.topMenu ul
+{
+	list-style:none;
 }
 .topMenu li
 {
@@ -566,7 +571,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 .plainMeta
 {
-	padding:0px 20px 20px 20px;
+	padding:10px 20px 20px 20px;
 	margin-bottom:10px;
 	background:url(../images/plainMeta_bg.png);
 	border-radius:5px;
@@ -576,13 +581,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 {
 	font-size:16px;
 	color:#464646;
-	padding:7px 10px 10px 0px;;
+	padding:3px 10px 10px 0px;;
 	line-height:21px;
 }
-.plainMeta li
+
+.plainMeta ul
 {
-	padding:0px;
+	padding-bottom:20px;
 }
+
+.plainMeta li, .slideList .more li
+{
+    font-size:16px;
+    color:#464646;
+    padding:3px 10px 3px 0px;
+    line-height:21px;
+}
+
 
 .plainMeta span
 {
@@ -674,7 +689,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	border-top:1px solid #D1D1D1;
 	background:#888;
 }
-.tabWrapper li:HOVER
+.tabWrapper ul:FIRST-CHILD li:HOVER
 {
 	cursor:pointer;
 }
@@ -685,9 +700,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 }
 .tabWrapper .plainMeta p
  {
-	background: url(../images/dot.png);
-	background-position: top-left;
-	background-repeat: no-repeat;
 	padding: 0px 10px 10px 25px;
 	font-size: 16px;
 	line-height:21px;

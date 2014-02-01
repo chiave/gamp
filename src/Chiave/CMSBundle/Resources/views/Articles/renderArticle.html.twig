@@ -52,7 +52,7 @@
             {% for entry in article.entries %}
                 <div id="tab{{ loop.index }}">
                     <div class="plainMeta">
-                        <h1 class="headerTab">{{ entry.header }}</h1>
+                        
                         {{ entry.content | raw }}
                     </div>
                 </div><!-- end tab{{ loop.index }} -->
