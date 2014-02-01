@@ -27,7 +27,7 @@
         {% for page in pages %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ page.title }}</td>
+                <td><a href="{{ path('cms_pages_show', { 'slug': page.slug }) }}">{{ page.title }}</a></td>
                 {#<td>{{ page.staticContent }}</td>#}
                 {# <td>{% if page.createdAt %}{{ page.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
                 {# <td>{% if page.updatedAt %}{{ page.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td> #}
@@ -36,7 +36,6 @@
                 <td>
                     <div class="button-bar">
                         <ul class="button-group">
-                            <li><a class="tiny button" href="{{ path('cms_pages_show', { 'slug': page.slug }) }}">Pokaż</a></li>
                             <li><a class="tiny button" href="{{ path('cms_pages_edit', { 'id': page.id }) }}">Edytuj</a></li>
                             <li><a class="tiny button alert delete_button" href="{{ path('cms_pages_delete', { 'id': page.id }) }}">Usuń</a></li>
                         </ul>
