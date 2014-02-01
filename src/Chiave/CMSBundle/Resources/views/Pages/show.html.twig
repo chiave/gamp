@@ -4,7 +4,10 @@
         {{ page.staticContent }}
 
         {% for article in page.articles %}
-            {{ render(controller('ChiaveCMSBundle:Articles:show', { id: article.id })) }}
+            {{ include(
+                'ChiaveCMSBundle:Articles:renderArticle.html.twig',
+                { 'article': article }
+            ) }}
         {% endfor %}
 
         {% if page.type == 1 %}

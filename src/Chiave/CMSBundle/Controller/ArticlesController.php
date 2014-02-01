@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Chiave\CMSBundle\Entity\Pages;
 use Chiave\CMSBundle\Entity\Articles;
 use Chiave\CMSBundle\Entity\Entries;
 
@@ -107,7 +108,7 @@ class ArticlesController extends Controller
      *
      * @Route("/articles/{id}", name="cms_articles_show")
      * @Method("GET")
-     * @Template()
+     * @Template("ChiaveCMSBundle:Pages:show.html.twig")
      */
     public function showAction($id)
     {
@@ -119,8 +120,14 @@ class ArticlesController extends Controller
             throw $this->createNotFoundException('Unable to find Articles.');
         }
 
+        $page = clone $article->getPage();
+        foreach ($page->getArticles() as $wrongArticle) {
+            $page->removeArticle($wrongArticle);
+        }
+        $page->addArticle($article);
+
         return array(
-            'article'      => $article,
+            'page'      => $page,
         );
     }
 

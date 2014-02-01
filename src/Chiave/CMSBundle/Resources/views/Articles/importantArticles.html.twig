@@ -10,7 +10,7 @@
             </div>
             <div class="meta">
                 <p>{{ article.shortDescription }}</p>
-                <a href="">Więcej...</a>
+                <a href="{{ path('cms_articles_show', {'id': article.id}) }}">Więcej...</a>
             </div>
             <div class="date">
                 <img src="{{ asset('images/clock_icon.png') }}" />

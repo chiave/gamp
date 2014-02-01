@@ -99,7 +99,7 @@ class Articles
 
     /**
      * @ORM\ManyToOne(targetEntity="Pages", inversedBy="articles")
-     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="page_id", referencedColumnName="id", nullable=false)
      **/
     private $page;
 
