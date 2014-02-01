@@ -1,7 +1,7 @@
 <ul>
     {% for page in pages %}
         <li>
-            <a href="{{ app.request.getBaseURL() }}/{{ page.slug }}">{{ page.menuName | raw }}</a>
+            <a href="{{ path('cms_pages_show', { slug: page.slug }) }}">{{ page.menuName | raw }}</a>
         </li>
     {% endfor %}
 </ul>

@@ -1,11 +1,13 @@
 {% for page in pages %}
-    <div class="metaBox">
-        <img alt="logo" src="{% if page.icon %}{{ page.icon.webPath }}{% endif %}" />
-        <div class="top">
-            <h2>{{ page.title }}</h2>
+    <a href="{{ path('cms_pages_show', { slug: page.slug }) }}">
+        <div class="metaBox">
+            <img alt="logo" src="{% if page.icon %}{{ page.icon.webPath }}{% endif %}" />
+            <div class="top">
+                <h2>{{ page.title }}</h2>
+            </div>
+            <div class="bottom">
+                 <h6>{{ page.shortDescription | raw }}</h6>
+             </div>
         </div>
-        <div class="bottom">
-             <h6>{{ page.shortDescription | raw }}</h6>
-         </div>
-    </div>
+    </a>
 {% endfor %}
