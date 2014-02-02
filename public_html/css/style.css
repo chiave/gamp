@@ -3,7 +3,6 @@
     -moz-box-sizing: content-box;
 }
 
-
 body, html
 {
 	width:100%;
@@ -198,13 +197,13 @@ body
 	-webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
 	box-shadow:         0px 3px 5px 0px rgba(0, 0, 0, 1);
-	
+
 }
 
 .topMenu li a
 {
-	
-	
+
+
 	display:table-cell;
     vertical-align:middle;
     height:50px;
@@ -669,7 +668,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	background: url(../images/plainMeta_bg.png);
 	border-radius:5px;
 }
-.tabWrapper ul:FIRST-CHILD 
+.tabWrapper ul:FIRST-CHILD
 {
 	display:block;
 	width:600px;
@@ -742,7 +741,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	display:block;
 	text-align:center;
 	margin:8px auto;
-	padding:7px 0px;
+    padding: 7px 0 7px 25px;
+    text-align: left;
 	font-size:12px;
 	background: #575757;
 	border-radius:10px;
@@ -770,21 +770,30 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	box-shadow:         0px 3px 5px 0px rgba(0, 0, 0, 1);
 	border:none;
 	color:white;
+    resize:vertical;
 }
 .contactForm textarea:FOCUS
 {
 	outline: none;
 }
-.contactForm input.submit
+.contactForm button.submit
 {
-		margin-top:25px;
-	background:#AC5896;
+	margin-top:25px;
+	background: none repeat scroll 0 0 #AC5896;
 	border:none;
 	border-radius:5px;
 	color:white;
 	-webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
 	-moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
 	box-shadow:         0px 3px 5px 0px rgba(0, 0, 0, 1);
+
+    width:300px;
+    display:block;
+    text-align:center;
+    margin:8px auto;
+    padding:7px 0px;
+    font-size:12px;
+    border-radius:10px;
 
 }
 .contactForm input.submit:HOVER

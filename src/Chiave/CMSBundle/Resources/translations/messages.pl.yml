@@ -29,8 +29,8 @@ Visible: Udostępnij plik
 File: Plik
 
 # Front - form in contact
-Firstname: Imię
-Lastname: Nazwisko
-Email: Adres e-mail
-Phone: Nr telefonu
-Message: Twoja wiadomość
+firstname: Imię
+lastname: Nazwisko
+email: Adres e-mail
+phone: Nr telefonu
+message: Twoja wiadomość
