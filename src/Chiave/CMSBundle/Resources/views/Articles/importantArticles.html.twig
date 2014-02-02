@@ -4,7 +4,11 @@
         <div class="item">
             <div class="logo">
                 <img alt="logo" src="
-                    {% if article.icon %}{{ article.icon.webPath }}{% endif %}
+                    {% if article.icon %}
+                        {{ article.icon.webPath }}
+                    {% elseif article.page.icon %}
+                        {{ article.page.icon.webPath }}
+                    {% endif %}
                 " />
 
             </div>
