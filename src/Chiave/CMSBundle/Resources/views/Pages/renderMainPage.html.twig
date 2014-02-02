@@ -1,7 +1,7 @@
 {% for page in pages %}
     <a href="{{ path('cms_pages_show', { slug: page.slug }) }}">
         <div class="metaBox">
-            <img alt="logo" src="{% if page.icon %}{{ page.icon.webPath }}{% endif %}" />
+            <img style="background-image: url('{% if page.icon %}{{ page.icon.webPath }}{% endif %}');" />
             <div class="top">
                 <h2>{{ page.title }}</h2>
             </div>
