@@ -4,7 +4,7 @@
     <h1>{{ catName }}</h1>
     {% for file in files %}
     <div class="fileItem">
-        <img src="/images/{{ file.extension }}.png" />
+        <img src="{{ asset('images/file-icons/') }}{{ file.extension }}.png" />
         <h1>{{ file.name }}</h1>
         <p>{{ file.description }}</p>
         <h2>Rozmiar: {{ file.sizeText }}</h2>
