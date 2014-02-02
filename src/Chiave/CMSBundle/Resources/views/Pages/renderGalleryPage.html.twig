@@ -4,7 +4,9 @@
     <div class="galleryImages">
         <ul class="clearing-thumbs" data-clearing>
             {% for image in images %}
-            <li><a href="{{ image.webPath }}" ><img src="{{ image.webPath }}" /></a></li>
+            <li>
+                <a href="{{ image.webPath }}" data-lightbox="gallery" title="{{ image.description }}"><img src="{{ image.webPath }}" /></a>
+            </li>
             {% endfor %}
         </ul>
     </div>

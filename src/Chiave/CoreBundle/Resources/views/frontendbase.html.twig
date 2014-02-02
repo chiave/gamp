@@ -8,13 +8,10 @@
 
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}" />
+        <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet" />
+
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-
-        <script type="text/javascript">
-            // $(function() {
-            // });
-        </script>
-
+        <script src="{{ asset('js/lightbox-2.6.min.js') }}"></script>
         <script src="{{ asset('bundles/chiavecore/js/modernizr.js') }}"></script>
         <script src="{{ asset('bundles/chiavecore/js/vendor/fastclick.js') }}"></script>
     </head>
@@ -46,13 +43,10 @@
         </div><!-- end div page -->
 
         {% block javascripts %}{% endblock %}
-        <script src="{{ asset('bundles/chiavecore/js/foundation.min.js') }}"></script>
-        <script src="{{ asset('bundles/chiavecore/js/foundation/foundation.clearing.js') }}"></script>
         <script type="text/javascript">
 
-            $(document).foundation();
             $(document).ready(function(){
-                
+
                 $('.tabWrapper ul:FIRST-CHILD li:FIRST-CHILD' ).addClass('active');
                 $('.tabWrapper ul:FIRST-CHILD li').click(function(){
                 	$('.tabWrapper ul:FIRST-CHILD li').removeClass("active");
@@ -60,7 +54,7 @@
                 	$('div.tabWrapper > div').hide();
                     $('div.tabWrapper > div:eq('+$(this).index()+')').show();
                     });
-                
+
                 $(".listToggle").click(function(){
                     $('div.more').slideUp();
                     if($(this).next().is(':hidden'))
