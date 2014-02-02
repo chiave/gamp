@@ -106,6 +106,8 @@ class PagesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $slug != '' ? null : $slug = null;
+
         $page = $em->getRepository('ChiaveCMSBundle:Pages')->findOneBySlug($slug);
 
         if (!$page) {
