@@ -1,8 +1,8 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "chiave/gamp",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "GAMP - real estate development and managing",
     "autoload": {
         "psr-0": { "": "src/" }
     },
@@ -41,9 +41,10 @@
     },
     "extra": {
         "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
+        "symfony-web-dir": "public_html",
         "incenteev-parameters": {
-            "file": "app/config/parameters.auto.yml"
+            "file": "app/config/parameters.yml",
+            "keep-outdated": true
         },
         "branch-alias": {
             "dev-master": "2.4-dev"
