@@ -27,6 +27,7 @@ class MailsType extends AbstractType
         if ($type == "raport") {
             $builder->add('type', 'choice', array(
                 'choices'   => Mails::getTypesArray(),
+                'empty_value' => 'Wybierz powód kontaktu',
             ));
         }
 
