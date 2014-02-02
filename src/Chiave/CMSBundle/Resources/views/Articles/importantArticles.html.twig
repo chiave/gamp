@@ -20,7 +20,7 @@
                 <img src="{{ asset('images/clock_icon.png') }}" />
                 <span>
                     {# 06 Stycznia 2014 #}
-                    {{ article.publicationDate | date('d F Y') }}
+{{ article.publicationDate | localizeddate('long', 'none', 'pl') }}
                 </span>
             </div>
         </div>
