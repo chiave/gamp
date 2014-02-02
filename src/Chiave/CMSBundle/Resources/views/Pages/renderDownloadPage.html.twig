@@ -8,7 +8,9 @@
         <h1>{{ file.name }}</h1>
         <p>{{ file.description }}</p>
         <h2>Rozmiar: {{ file.sizeText }}</h2>
-        <input type="button" value="Pobierz" />
+        <a class="button"
+           href="{{ path('cms_files_download', { filename: file.path }) }}"
+       >Pobierz</a>
     </div>
     {% endfor %}
 </div>

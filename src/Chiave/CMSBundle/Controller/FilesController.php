@@ -3,6 +3,7 @@
 namespace Chiave\CMSBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -186,6 +187,41 @@ class FilesController extends Controller
 
         return new JsonResponse($result);
     }
+
+    /**
+     * Download file.
+     *
+     * @Route("/download/{filename}", name="cms_files_download")
+     * @Method("GET")
+     */
+    public function downloadAction(Request $request, $filename)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $file = $em->getRepository('ChiaveCMSBundle:Files')
+                ->findOneByPath($filename);
+
+        if (!$file) {
+            throw $this->createNotFoundException('Unable to find Files.');
+        }
+
+        $path = $file->getAbsolutePath();
+        $content = file_get_contents($path);
+
+        $response = new Response();
+
+        $response->headers->set('Content-Type', $file->getMimeType());
+        $response->headers->set(
+                'Content-Disposition',
+                'attachment;filename="'.
+                    $file->getName().'.'.
+                    $file->getExtension()
+            );
+
+        $response->setContent($content);
+        return $response;
+    }
+
 
     /**
     * Creates a form for file.
