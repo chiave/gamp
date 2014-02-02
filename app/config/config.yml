@@ -66,9 +66,9 @@ swiftmailer:
     transport:          "%mailer_transport%"
     encryption:         "%mailer_encryption%"
     auth_mode:          "%mailer_auth_mode%"
-    host:               "%mailer_port%"
+    port:               "%mailer_port%"
     host:               "%mailer_host%"
-    username:           "%mailer_user%"
+    username:           "%mailer_username%"
     password:           "%mailer_password%"
     # delivery_address:   "%mailer_delivery_address%"
     # spool:     { type: memory }
