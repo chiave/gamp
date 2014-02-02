@@ -277,6 +277,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 }
 .infoBox .item .logo img
 {
+    display: block;
 	width:60px;
 	height:60px;
     background-size: cover;
@@ -422,7 +423,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     background-position: 50% 50%;
     position:absolute;
     top:52px;
-	
+
 
 }
 .boxWrapper .metaBox .top
@@ -821,7 +822,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	margin:10px auto;
 	color: #464646;
 	font-size:16px;
-	
+
 	border-radius:10px;
         -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 1);
     -moz-box-shadow:    0px 3px 5px 0px rgba(0, 0, 0, 1);
@@ -964,7 +965,7 @@ line-height: 21px;
 .galleryCategory .galleryImages ul
 {
 	list-style:none;
-	
+
 }
 .galleryCategory .galleryImages li img
 {
@@ -975,7 +976,7 @@ line-height: 21px;
 	float: left;
 	overflow: hidden;
 }
-.galleryCategory .galleryImages li 
+.galleryCategory .galleryImages li
 {
 	float:left;
 }
